@@ -22,8 +22,8 @@ OptionDialog::OptionDialog(QWidget* parent)
         ui->musicCb->setChecked(true);
     }
 
-    ui->carddeck1->setIcon(QIcon(QPixmap("img/deck_1/08.png")));
-    ui->carddeck2->setIcon(QIcon(QPixmap("img/deck_2/08.gif")));
+    ui->carddeck1->setIcon(QIcon(QPixmap(":/img/deck_1/08.png")));
+    ui->carddeck2->setIcon(QIcon(QPixmap(":/img/deck_2/08.gif")));
 
     if (Settings::getInstance()->getProperty("common/card_deck").toInt() == 1) {
         ui->carddeck1radio->setChecked(true);

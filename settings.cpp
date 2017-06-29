@@ -3,7 +3,7 @@
 
 Settings* instance;
 // config.ini should store all the additional configurations
-const QString configPath("config.ini");
+const QString configPath("/home/tomasz/MAKAO/qtMauMau/config.ini");
 
 Settings::Settings(QObject* parent)
     : QObject(parent)

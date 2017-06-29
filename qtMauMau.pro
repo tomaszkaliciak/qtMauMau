@@ -8,7 +8,7 @@ QT       += core gui
 QT       += network
 QT       += testlib
 QT       += multimedia
-QT       += webkitwidgets
+QT       += webenginewidgets
 
 
 greaterThan(QT_MAJOR_VERSION, 5): QT += widgets
@@ -117,4 +117,7 @@ config.files   = config.ini
 translation.path    = $$DESTDIR/
 translation.files   = qtmaumau_de.qm
 INSTALLS       += images config translation sound
+
+RESOURCES += \
+    res.qrc
 

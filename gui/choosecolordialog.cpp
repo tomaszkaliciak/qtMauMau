@@ -11,16 +11,16 @@ ChooseColorDialog::ChooseColorDialog(QWidget* parent)
     QString deckNumber = Settings::getInstance()->getProperty("common/card_deck");
     QString imgExtension = Settings::getInstance()->getProperty("common/card_img_extension");
 
-    ui->btnHearts->setIcon(QIcon(QPixmap("img/deck_" + deckNumber + "/hearts" + imgExtension)));
+    ui->btnHearts->setIcon(QIcon(QPixmap(":/img/deck_" + deckNumber + "/hearts" + imgExtension)));
     ui->btnHearts->installEventFilter(this);
 
-    ui->btnDiamonds->setIcon(QIcon(QPixmap("img/deck_" + deckNumber + "/diamonds" + imgExtension)));
+    ui->btnDiamonds->setIcon(QIcon(QPixmap(":/img/deck_" + deckNumber + "/diamonds" + imgExtension)));
     ui->btnDiamonds->installEventFilter(this);
 
-    ui->btnClubs->setIcon(QIcon(QPixmap("img/deck_" + deckNumber + "/clubs" + imgExtension)));
+    ui->btnClubs->setIcon(QIcon(QPixmap(":/img/deck_" + deckNumber + "/clubs" + imgExtension)));
     ui->btnClubs->installEventFilter(this);
 
-    ui->btnSpades->setIcon(QIcon(QPixmap("img/deck_" + deckNumber + "/spades" + imgExtension)));
+    ui->btnSpades->setIcon(QIcon(QPixmap(":/img/deck_" + deckNumber + "/spades" + imgExtension)));
     ui->btnSpades->installEventFilter(this);
 }
 

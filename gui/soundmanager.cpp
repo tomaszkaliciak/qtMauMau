@@ -23,7 +23,7 @@ void SoundManager::playCard()
 {
     int random = getRandom(1, 4);
 
-    effect->setSource(QUrl::fromLocalFile("sound/cardPlace" + QString::number(random) + ".wav"));
+    effect->setSource(QUrl::fromLocalFile(":/sound/cardPlace" + QString::number(random) + ".wav"));
     effect->play();
 }
 
@@ -46,7 +46,7 @@ int SoundManager::getRandom(int low, int high)
 void SoundManager::drawCard()
 {
     int random = getRandom(1, 4);
-    effect->setSource(QUrl::fromLocalFile("sound/cardShove" + QString::number(random) + ".wav"));
+    effect->setSource(QUrl::fromLocalFile(":/sound/cardShove" + QString::number(random) + ".wav"));
     effect->play();
 }
 
@@ -56,13 +56,13 @@ void SoundManager::drawCard()
  */
 void SoundManager::startSound()
 {
-    effect->setSource(QUrl::fromLocalFile("sound/cardShuffle.wav"));
+    effect->setSource(QUrl::fromLocalFile(":/sound/cardShuffle.wav"));
     effect->play();
 }
 
 void SoundManager::winnerSound()
 {
-    effect->setSource(QUrl::fromLocalFile("sound/fanfare.wav"));
+    effect->setSource(QUrl::fromLocalFile(":/sound/fanfare.wav"));
     effect->play();
 }
 
@@ -73,7 +73,7 @@ void SoundManager::winnerSound()
 void SoundManager::playBackgroundSong()
 {
     if (Settings::getInstance()->getProperty("common/background_music").toInt() == 1) {
-        player->setMedia(QUrl::fromLocalFile("sound/hansatom.mp3"));
+        player->setMedia(QUrl::fromLocalFile(":/sound/hansatom.mp3"));
         player->play();
     }
 }

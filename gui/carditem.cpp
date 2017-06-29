@@ -145,7 +145,7 @@ QGraphicsPixmapItem* CardItem::createImg()
         } else {
             imgName = getNormalCardName();
         }
-        std::string fullImagePath("img/deck_" + deckNumber + "/" + imgName + imgExtension);
+        std::string fullImagePath(":/img/deck_" + deckNumber + "/" + imgName + imgExtension);
 
         graphicsItem = new QGraphicsPixmapItem(QPixmap(fullImagePath.c_str()));
         if (x != 0 && y != 0) {

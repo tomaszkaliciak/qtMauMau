@@ -1,6 +1,6 @@
 #include "infodialog.h"
 #include "ui_infodialog.h"
-#include "QtWebKitWidgets/QWebView"
+#include <QWebEngineView>
 #include "QUrl"
 
 InfoDialog::InfoDialog(QWidget* parent)
@@ -17,7 +17,7 @@ InfoDialog::~InfoDialog()
 
 void InfoDialog::on_twitterBtn_clicked()
 {
-    QWebView* webView = new QWebView();
+    QWebEngineView* webView = new QWebEngineView();
     webView->setAttribute(Qt::WA_DeleteOnClose, true);
     webView->load(QUrl("http://twitter.com/share?text=Ich spiele gerad QT Mau Mau! github.com/pFriesch/qtMauMau"));
     // webView->load(QUrl("http://google.de/"));

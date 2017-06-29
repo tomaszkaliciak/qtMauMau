@@ -3,7 +3,7 @@
 Playground::Playground(QObject* parent)
     : AnimatedGraphicsScene(parent)
 {
-    QImage img("img/green_background.jpg", "jpg");
+    QImage img(":/img/green_background.jpg", "jpg");
     QBrush brush(img);
 
     if(img.isNull()){
