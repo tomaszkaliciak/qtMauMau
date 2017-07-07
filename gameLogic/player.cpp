@@ -68,7 +68,8 @@ std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wish
             if (card.getValue() == hand[i].getValue() || card.getSuit() == hand[i].getSuit()) {
                 playableCards.push_back(hand[i]);
             }
-        }
+
+       }
     }
     return playableCards;
 }

@@ -87,7 +87,6 @@ void GameController::nextTurn()
 {
     if (!aPlayerWon) {
         playerPlayed = false;
-        int drawCount = 0;
         setNextPlayer();
 
         players[playerOrder[0]]->doTurn(cardDepot.back(), wishedSuit, is4played, drawCount, toSkipCounter);
