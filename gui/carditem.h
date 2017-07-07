@@ -11,6 +11,7 @@
 #include <QString>
 #include <QPixmap>
 
+
 class CardItem {
 
 public:

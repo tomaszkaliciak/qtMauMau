@@ -84,3 +84,5 @@ Bonuspunkte:
 
 ![ScreenShot](https://raw.githubusercontent.com/pFriesch/qtMauMau/master/screenshot.png
 )
+
+Icons: https://github.com/hayeah/playing-cards-assets

@@ -48,15 +48,19 @@ private:
 
     bool changedDirection = false;
     Card::cardSuit wishedSuit = Card::NONE;
-    bool draw2x = false;
-    int draw2xCount = 0;
-    bool skipNextPlayer = false;
+
+    int drawCount = 0;
+
+    int toSkipCounter = 0;
+
+    bool is4played = false;
 
     //special cards
-    Card::cardValue draw2xCard;
-    Card::cardValue wishSuitCard;
-    Card::cardValue skipNextCard;
-    Card::cardValue changeDirectCard;
+    Card::cardValue draw2xCard = Card::TWO;
+    Card::cardValue draw3xCard = Card::THREE;
+    Card::cardValue wishSuitCard = Card::ACE;
+    Card::cardValue skipNextCard = Card::FOUR;
+    Card::cardValue changeDirectCard = Card::NONEE;
 
 public:
     /**
@@ -79,10 +83,7 @@ public:
      * @param _skipNextCard custom card to skip the next player
      * @param _changeDirectCard custom card to change the direction
      */
-    void gameInit(Card::cardValue _draw2xCard = Card::SEVEN,
-                  Card::cardValue _wishSuitCard = Card::JACK,
-                  Card::cardValue _skipNextCard = Card::EIGHT,
-                  Card::cardValue _changeDirectCard = Card::TEN);
+    void gameInit();
     /**
      * called by a player through the gamecontroller proxy
      * @brief playCard called by a player
@@ -101,10 +102,10 @@ public:
 
 private:
     void nextTurn();
-    void setFlags(const Card& card);
     void setNextPlayer();
     void playerDrawCard(PLAYER::Name pName);
-    void handleDraw2x();
+    void handleMultiDraw();
+    void setFlags(const Card& card);
     void playerWon(PLAYER::Name playerName);
     std::vector<std::string> getPlayerNames();
 };

@@ -82,6 +82,11 @@ void GameHistory::write(QString text, Card::cardSuit suit, Card::cardValue value
 QString GameHistory::cardToString(CardItem item){
         QString hand;
         switch (item.getCard().getValue()) {
+        case Card::cardValue::TWO: hand += "2 "; break;
+        case Card::cardValue::THREE: hand += "3 "; break;
+        case Card::cardValue::FOUR: hand += "4 "; break;
+        case Card::cardValue::FIVE: hand += "5 "; break;
+        case Card::cardValue::SIX: hand += "6 "; break;
         case Card::cardValue::SEVEN: hand += "7 "; break;
         case Card::cardValue::EIGHT: hand += "8 "; break;
         case Card::cardValue::NINE: hand += "9 "; break;
@@ -90,6 +95,7 @@ QString GameHistory::cardToString(CardItem item){
         case Card::cardValue::QUEEN: hand += "Queen "; break;
         case Card::cardValue::KING: hand += "King "; break;
         case Card::cardValue::ACE: hand += "Ace "; break;
+        case Card::cardValue::NONEE: hand += "NONEE "; break;
         }
 
         switch (item.getCard().getSuit()) {

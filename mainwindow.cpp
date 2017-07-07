@@ -181,23 +181,7 @@ void MainWindow::startGameAsLocal()
     gc->setPlayers(players);
     connectSignalsForLocal(static_cast<HumanPlayer*>(players.at(0)));
     playground->startGame();
-    try
-    {
-        if (Settings::getInstance()->contains("game/draw2xCard")) {
-            gc->gameInit(Card::cardValue(Settings::getInstance()->getProperty("game/draw2xCard").toInt()),
-                         Card::cardValue(Settings::getInstance()->getProperty("game/wishSuitCard").toInt()),
-                         Card::cardValue(Settings::getInstance()->getProperty("game/skipNextCard").toInt()),
-                         Card::cardValue(Settings::getInstance()->getProperty("game/changeDirectCard").toInt()));
-        } else {
-            gc->gameInit();
-        }
-    }
-    catch (std::exception e)
-    {
-        QMessageBox msgBox;
-        msgBox.setText(tr("An logical game error occured while playing. This should never happen.\nBut when it does the game can't continue and you need to start a new game"));
-        msgBox.exec();
-    }
+    gc->gameInit();
 }
 /**
  * @brief MainWindow::startGameAsServerDialog initializes a creat server dialog
@@ -247,23 +231,8 @@ void MainWindow::startNetworkGame(QVector<Player::Type> players, QStringList oth
     gc->setPlayers(_players);
     createServerDialog->hide();
     playground->startGame();
-    try
-    {
-        if (Settings::getInstance()->contains("game/draw2xCard")) {
-            gc->gameInit(Card::cardValue(Settings::getInstance()->getProperty("game/draw2xCard").toInt()),
-                         Card::cardValue(Settings::getInstance()->getProperty("game/wishSuitCard").toInt()),
-                         Card::cardValue(Settings::getInstance()->getProperty("game/skipNextCard").toInt()),
-                         Card::cardValue(Settings::getInstance()->getProperty("game/changeDirectCard").toInt()));
-        } else {
-            gc->gameInit();
-        }
-    }
-    catch (std::exception e)
-    {
-        QMessageBox msgBox;
-        msgBox.setText(tr("An logical game error occured while playing. This should never happen.\nBut when it does the game can't continue and you need to start a new game"));
-        msgBox.exec();
-    }
+
+    gc->gameInit();
 }
 /**
  * @brief MainWindow::startGameAsClient initializes game in the client role

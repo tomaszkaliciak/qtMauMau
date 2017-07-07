@@ -1,5 +1,4 @@
 #include "card.h"
-
 Card::Card(const cardSuit cSuit, const cardValue cValue)
     : suit(cSuit)
     , value(cValue)
@@ -31,4 +30,19 @@ Card::cardValue Card::getValue() const
 bool Card::operator==(const Card& card) const
 {
     return ((card.getSuit() == suit)) && (card.getValue() == value);
+}
+
+bool Card::isFunctional()const {
+    if (value == Card::cardValue(1)   ||
+        value == Card::cardValue(2)   ||
+        value == Card::cardValue(3)   ||
+        value == Card::cardValue(10)  ||
+        value == Card::cardValue(12)  ||
+        value == Card::cardValue(13)) {
+
+        return true;
+    }
+    else {
+        return false;
+    }
 }

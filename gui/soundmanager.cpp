@@ -56,13 +56,13 @@ void SoundManager::drawCard()
  */
 void SoundManager::startSound()
 {
-    effect->setSource(QUrl::fromLocalFile(":/sound/cardShuffle.wav"));
+    effect->setSource(QUrl::fromLocalFile(":/sound/partia.wav"));
     effect->play();
 }
 
 void SoundManager::winnerSound()
 {
-    effect->setSource(QUrl::fromLocalFile(":/sound/fanfare.wav"));
+    effect->setSource(QUrl::fromLocalFile(":/sound/makao.wav"));
     effect->play();
 }
 
@@ -88,6 +88,7 @@ void SoundManager::stateChanged(QMediaPlayer::State state)
         player->play();
     }
 }
+
 SoundManager::~SoundManager(){
     effect->stop();
     player->stop();

@@ -26,10 +26,13 @@ private:
 
 public:
     Deck(Deck::InitStatus staus = Deck::EMPTY);
-    /**
+    /**     * returns all cards but the top/back card of this deck, all the returned cards are dropped afterwards.
+     * @brief getUnderlyingCards returns all cards but the top/back card of this deck
+     * @return all cards but the top/back card of this deck
      * more information about the shuffle algorithm: http://bost.ocks.org/mike/shuffle/
      * @brief shuffle shuffles the deck with the Fished-Yates shuffle
      */
+    void shuffleManager();
     void shuffle();
     void pushCard(const Card card);
     /**

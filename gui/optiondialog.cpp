@@ -22,8 +22,8 @@ OptionDialog::OptionDialog(QWidget* parent)
         ui->musicCb->setChecked(true);
     }
 
-    ui->carddeck1->setIcon(QIcon(QPixmap(":/img/deck_1/08.png")));
-    ui->carddeck2->setIcon(QIcon(QPixmap(":/img/deck_2/08.gif")));
+    ui->carddeck1->setIcon(QIcon(QPixmap(":/img/deck_1/008.png")));
+    ui->carddeck2->setIcon(QIcon(QPixmap(":/img/deck_2/008.gif")));
 
     if (Settings::getInstance()->getProperty("common/card_deck").toInt() == 1) {
         ui->carddeck1radio->setChecked(true);
@@ -72,10 +72,10 @@ void OptionDialog::acceptEvent()
 
     }
 
-    Settings::getInstance()->setProperty("game/draw2xCard", QString::number(ui->draw2xcombo->currentIndex() + 1));
-    Settings::getInstance()->setProperty("game/wishSuitCard", QString::number(ui->wishcombo->currentIndex() + 1));
-    Settings::getInstance()->setProperty("game/skipNextCard", QString::number(ui->skipplayercombo->currentIndex() + 1));
-    Settings::getInstance()->setProperty("game/changeDirectCard", QString::number(ui->changedirectcombo->currentIndex() + 1));
+  //  Settings::getInstance()->setProperty("game/draw2xCard", QString::number(ui->draw2xcombo->currentIndex() + 1));
+  //  Settings::getInstance()->setProperty("game/wishSuitCard", QString::number(ui->wishcombo->currentIndex() + 1));
+  //  Settings::getInstance()->setProperty("game/skipNextCard", QString::number(ui->skipplayercombo->currentIndex() + 1));
+  //  Settings::getInstance()->setProperty("game/changeDirectCard", QString::number(ui->changedirectcombo->currentIndex() + 1));
     close();
 }
 

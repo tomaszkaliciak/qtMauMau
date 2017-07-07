@@ -97,7 +97,8 @@ FORMS    += \
     gui/createserverdialog.ui \
     gui/setnamedialog.ui \
     gui/infodialog.ui \
-    gui/addremoteplayer.ui
+    gui/addremoteplayer.ui \
+    gui/choosecvaluedialog.ui
 
 
 TRANSLATIONS    = qtmaumau_de.ts \

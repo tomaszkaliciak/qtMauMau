@@ -37,15 +37,15 @@ private:
     void showNameDialog();
     void resetGame();
 
-    Playground* playground = NULL;
-    GameController* gc = NULL;
-    OptionDialog* optionDialog = NULL;
-    ConnectToServer* connectToServer = NULL;
-    CreateServerDialog* createServerDialog = NULL;
-    InfoDialog* infoDialog = NULL;
-    MauServer* server = NULL;
-    MauClient* client = NULL;
-    QGraphicsView* view = NULL;
+    Playground* playground = nullptr;
+    GameController* gc = nullptr;
+    OptionDialog* optionDialog = nullptr;
+    ConnectToServer* connectToServer = nullptr;
+    CreateServerDialog* createServerDialog = nullptr;
+    InfoDialog* infoDialog = nullptr;
+    MauServer* server = nullptr;
+    MauClient* client = nullptr;
+    QGraphicsView* view = nullptr;
 
     //Game Starts
 private

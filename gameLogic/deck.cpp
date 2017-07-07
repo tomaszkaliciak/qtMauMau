@@ -1,5 +1,4 @@
 #include "deck.h"
-
 //
 /**
  * Initializes a full cad deck
@@ -8,18 +7,25 @@ Deck::Deck(Deck::InitStatus status)
 {
     if (status == Deck::FULL) {
         for (int i = 0; i < 4; i++) {
-            for (int j = 1; j <= 8; j++) {
+            for (int j = 1; j <= 13; j++) {
                 cards.push_back(Card(Card::cardSuit(i), Card::cardValue(j)));
+                }
             }
-        }
+            shuffleManager();
     }
-    this->shuffle();
 }
 
 /*
  * http://bost.ocks.org/mike/shuffle/
  *
  */
+void Deck::shuffleManager() {
+    shuffle();
+    while(cards.back().isFunctional()) {
+        shuffle();
+    }
+}
+
 void Deck::shuffle()
 {
     int m = cards.size();
@@ -27,9 +33,7 @@ void Deck::shuffle()
     int i;
     while (m) {
         i = (rand() % m--);
-        temp = cards[m];
-        cards[m] = cards[i];
-        cards[i] = temp;
+        std::swap(cards[i],cards[m]);
     }
 }
 
@@ -86,5 +90,5 @@ std::vector<Card> Deck::getUnderlyingCards()
 void Deck::addCards(std::vector<Card> newCards)
 {
     cards.insert(cards.end(), newCards.begin(), newCards.end());
-    shuffle();
+    shuffleManager();
 }

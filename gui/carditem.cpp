@@ -1,5 +1,7 @@
 #include "carditem.h"
 #include "settings.h"
+#include <cstdlib>
+#include <iostream>
 
 /**
  * Constructor with Depot Card as Default
@@ -131,6 +133,7 @@ QGraphicsPixmapItem* CardItem::getGraphicsItem() const
  * @brief CardItem::createImg
  * @return
  */
+
 QGraphicsPixmapItem* CardItem::createImg()
 {
 
@@ -138,14 +141,21 @@ QGraphicsPixmapItem* CardItem::createImg()
     imgExtension = Settings::getInstance()->getProperty("common/card_img_extension").toStdString();
 
     if (graphicsItem == NULL) {
-
+        std::string fullImagePath;
         std::string imgName("");
         if (specialCode != specialCards::NOT_USED) {
             imgName = getSpecialCardName();
+            fullImagePath = ":/img/deck_" + deckNumber + "/" + imgName + imgExtension;
         } else {
             imgName = getNormalCardName();
+            if(imgName.size() >= 3) {
+                fullImagePath = ":/img/deck_" + deckNumber + "/" + imgName + imgExtension;
+            }
+            else {
+                imgName.insert(1,"0");
+                fullImagePath = ":/img/deck_" + deckNumber + "/" + imgName + imgExtension;
+            }
         }
-        std::string fullImagePath(":/img/deck_" + deckNumber + "/" + imgName + imgExtension);
 
         graphicsItem = new QGraphicsPixmapItem(QPixmap(fullImagePath.c_str()));
         if (x != 0 && y != 0) {

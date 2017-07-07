@@ -1,6 +1,7 @@
 #include "player.h"
 #include <algorithm>
 #include <stdexcept>
+#include <iostream>
 
 PLAYER::Name Player::getPName() const
 {
@@ -29,19 +30,42 @@ Player::~Player()
 
 }
 
-std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wishedSuit)
+std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wishedSuit,bool& is4played, int drawCount, int& toSkipCounter)
 {
     std::vector<Card> playableCards;
     for (unsigned i = 0; i < hand.size(); ++i) {
-        if (card.getValue() == wishSuitCard) {
+      /*  if(card.getValue() == Card::FOUR && is4played) { // czwórka na stole
+            if(hand[i].getValue() == Card::FOUR) {  // czwórka w rece
+                playableCards.push_back(hand[i]);
+            }
+            else {
+                roundsToSkip = toSkipCounter;
+                toSkipCounter = 0;
+                is4played = false;
+            }
+        }*/
+       if (card.getValue() == Card::ACE) {
             //in case a wishSuitCard is on top at game start
             if (wishedSuit == Card::NONE && (card.getValue() == hand[i].getValue() || card.getSuit() == hand[i].getSuit())) {
                 playableCards.push_back(hand[i]);
             } else if (card.getValue() == hand[i].getValue() || wishedSuit == hand[i].getSuit()) {
                 playableCards.push_back(hand[i]);
             }
-        } else {
-            if (card.getValue() == hand[i].getValue() || card.getSuit() == hand[i].getSuit() || hand[i].getValue() == wishSuitCard) {
+        }
+        else if(card.getValue() == Card::TWO && drawCount) {
+            if(hand[i].getValue() == Card::TWO ||  // mozna zagrac dwojke
+              (hand[i].getValue() == Card::THREE && hand[i].getSuit() == card.getSuit() )) { //trojke tego samego koloru
+                playableCards.push_back(hand[i]);
+            }
+        }
+        else if(card.getValue() == Card::THREE && drawCount) {
+            if(hand[i].getValue() == Card::THREE ||  // mozna zagrac trójke
+              (hand[i].getValue() == Card::TWO && hand[i].getSuit() == card.getSuit() )) { //dwojke tego samego koloru
+                playableCards.push_back(hand[i]);
+            }
+        }
+        else {
+            if (card.getValue() == hand[i].getValue() || card.getSuit() == hand[i].getSuit()) {
                 playableCards.push_back(hand[i]);
             }
         }
@@ -57,5 +81,15 @@ void Player::dropCard(const Card& card)
         hand.erase(pos);
     } else {
         throw std::range_error("Card not found in hand.");
+    }
+}
+
+bool Player::skipPlayer() {
+    if(roundsToSkip) {
+        --roundsToSkip;
+        return true;
+    }
+    else {
+        return false;
     }
 }

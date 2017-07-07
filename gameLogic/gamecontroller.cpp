@@ -1,6 +1,6 @@
 #include "gamecontroller.h"
 #include "gamecontrollerproxy.h"
-#include "algorithm"
+#include <iostream>
 
 GameController::GameController()
     : cardStack(Deck::FULL)
@@ -23,17 +23,13 @@ void GameController::setPlayers(std::vector<Player*> _players)
     }
 }
 
-void GameController::gameInit(Card::cardValue _draw2xCard,
-                              Card::cardValue _wishSuitCard,
-                              Card::cardValue _skipNextCard,
-                              Card::cardValue _changeDirectCard)
+void GameController::gameInit()
 {
-    draw2xCard = _draw2xCard;
-    wishSuitCard = _wishSuitCard;
-    skipNextCard = _skipNextCard;
-    changeDirectCard = _changeDirectCard;
 
-    cardStack.shuffle();
+    cardStack.shuffleManager();
+
+    cardDepot.pushCard(cardStack.getLast(cardDepot));
+
     std::vector<std::vector<Card> > playerCards;
     for (unsigned i = 0; i < players.size(); i++) {
         playerCards.push_back(std::vector<Card>());
@@ -41,7 +37,6 @@ void GameController::gameInit(Card::cardValue _draw2xCard,
             playerCards.at(i).push_back(cardStack.getLast(cardDepot));
         }
     }
-    cardDepot.pushCard(cardStack.getLast(cardDepot));
 
     std::map<PLAYER::Name, int> otherPlayerCardCount;
     for (unsigned int i = 0; i < players.size(); ++i) {
@@ -51,15 +46,17 @@ void GameController::gameInit(Card::cardValue _draw2xCard,
 
         players[i]->gameInit(playerCards.at(i), cardDepot.back(), otherPlayerCardCount, wishSuitCard, getPlayerNames());
     }
-    players[playerOrder[0]]->doTurn(cardDepot.back(), Card::NONE);
+    players[playerOrder[0]]->doTurn(cardDepot.back(), Card::NONE, is4played, drawCount, toSkipCounter);
 }
 
 void GameController::playCard(PLAYER::Name pName, const Card& card, Card::cardSuit whishedSuit)
 {
     if (playerOrder[0] == pName && !playerPlayed) {
+
         playerPlayed = true;
         this->wishedSuit = whishedSuit;
         cardDepot.pushCard(card);
+
         for (unsigned i = 0; i < players.size(); ++i) {
             if (players.at(i)->getPName() != pName) {
                 players.at(i)->otherPlaysCard(pName, cardDepot.back());
@@ -69,9 +66,8 @@ void GameController::playCard(PLAYER::Name pName, const Card& card, Card::cardSu
         if (!players[playerOrder[0]]->getCardCount()) {
             playerWon(playerOrder[0]);
         }
-        if (skipNextPlayer) {
+        if (players[playerOrder[1]]->skipPlayer()) {
             setNextPlayer();
-            skipNextPlayer = false;
         }
         nextTurn();
     }
@@ -82,7 +78,7 @@ void GameController::drawCard(PLAYER::Name pName)
     if (playerOrder[0] == pName && !playerPlayed) {
         playerPlayed = true;
         playerDrawCard(pName);
-        handleDraw2x();
+        handleMultiDraw();
         nextTurn();
     }
 }
@@ -91,9 +87,12 @@ void GameController::nextTurn()
 {
     if (!aPlayerWon) {
         playerPlayed = false;
+        int drawCount = 0;
         setNextPlayer();
-        players[playerOrder[0]]->doTurn(cardDepot.back(), wishedSuit);
+
+        players[playerOrder[0]]->doTurn(cardDepot.back(), wishedSuit, is4played, drawCount, toSkipCounter);
     } else {
+        // na razie gra toczy sie az ktos nie wygra, (ktos wygra -> koniec gry)
     }
 }
 
@@ -106,32 +105,39 @@ void GameController::setFlags(const Card& card)
             changedDirection = true;
         }
     }
-    if (card.getValue() == wishSuitCard) {
-        //already handled by play card
-    }
-    if (card.getValue() == draw2xCard) {
-        if (draw2x) {
-            draw2xCount = draw2xCount + 2;
-        } else {
-            draw2x = true;
-            draw2xCount = 2;
+
+    if (card.getValue() == Card::TWO || card.getValue() == Card::THREE ) {
+        if (card.getValue() == Card::TWO && drawCount) {
+            drawCount += 2;
         }
-    } else {
-        handleDraw2x();
+        else if(card.getValue() == Card::THREE && drawCount) {
+            drawCount += 3;
+        }
+        else {
+            if(card.getValue() == Card::TWO) {
+                drawCount = 1;
+            }
+            else {
+                drawCount = 2;
+            }
+        }
     }
-    if (card.getValue() == skipNextCard) {
-        skipNextPlayer = true;
+    else {
+        handleMultiDraw();
+    }
+
+    if(cardDepot.back().getValue() == Card::FOUR) {
+            ++toSkipCounter;
     }
 }
 
-void GameController::handleDraw2x()
+void GameController::handleMultiDraw()
 {
-    if (draw2x) {
-        for (int i = 0; i < draw2xCount; ++i) {
+    if (drawCount) {
+        for (int i = 0; i < drawCount; ++i) {
             playerDrawCard(playerOrder[0]);
         }
-        draw2xCount = 0;
-        draw2x = false;
+        drawCount = 0;
     }
 }
 
@@ -154,7 +160,7 @@ std::vector<std::string> GameController::getPlayerNames()
 
 void GameController::setNextPlayer()
 {
-    if (changedDirection) {
+    if (!changedDirection) {
         std::rotate(playerOrder.begin(), playerOrder.begin() + 1, playerOrder.end());
     } else {
         std::rotate(playerOrder.begin(), playerOrder.end() - 1, playerOrder.end());

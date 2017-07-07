@@ -14,14 +14,20 @@ public:
     };
 
     enum cardValue {
-        SEVEN = 1,
-        EIGHT = 2,
-        NINE = 3,
-        TEN = 4,
-        JACK = 5,
-        QUEEN = 6,
-        KING = 7,
-        ACE = 8,
+        TWO = 1,
+        THREE = 2,
+        FOUR = 3,
+        FIVE = 4,
+        SIX = 5,
+        SEVEN = 6,
+        EIGHT = 7,
+        NINE = 8,
+        TEN = 9,
+        JACK = 10,
+        QUEEN = 11,
+        KING = 12,
+        ACE = 13,
+        NONEE = 14
     };
 
 private:
@@ -34,6 +40,8 @@ public:
     Card();
     cardSuit getSuit() const;
     cardValue getValue() const;
+
+    bool isFunctional() const;
     /**
      * @brief operator == checks if the values of the two cards are equal
      * @param card
