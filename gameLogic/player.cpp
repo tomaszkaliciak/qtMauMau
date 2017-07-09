@@ -30,30 +30,30 @@ Player::~Player()
 
 }
 
-std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wishedSuit,bool& is4played, int drawCount, int& toSkipCounter)
+std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool& is4played, int drawCount, int& toSkipCounter)
 {
     std::vector<Card> playableCards;
     for (unsigned i = 0; i < hand.size(); ++i) {
-      /*  if(card.getValue() == Card::FOUR && is4played) { // czwórka na stole
+        if(card.getValue() == Card::FOUR && is4played) { // czwórka na stole
             if(hand[i].getValue() == Card::FOUR) {  // czwórka w rece
                 playableCards.push_back(hand[i]);
+                std::cout << "Nazywam sie " << getTitle() << " wartosc licznika " << toSkipCounter << std::endl;
             }
             else {
                 roundsToSkip = toSkipCounter;
                 toSkipCounter = 0;
+                std::cout << "Nazywam sie " << getTitle() << " i czekam " << roundsToSkip << std::endl;
                 is4played = false;
             }
-        }*/
-       if (card.getValue() == Card::ACE) {
-            //in case a wishSuitCard is on top at game start
-            if (wishedSuit == Card::NONE && (card.getValue() == hand[i].getValue() || card.getSuit() == hand[i].getSuit())) {
-                playableCards.push_back(hand[i]);
-            } else if (card.getValue() == hand[i].getValue() || wishedSuit == hand[i].getSuit()) {
-                playableCards.push_back(hand[i]);
-            }
         }
+       else if (card.getValue() == Card::ACE && (card.getValue() == hand[i].getValue() || wishedSuit == hand[i].getSuit())) {
+                playableCards.push_back(hand[i]);
+        }
+        else if (card.getValue() == Card::JACK && (card.getValue() == hand[i].getValue() || whishedValue == hand[i].getSuit())) {
+                 playableCards.push_back(hand[i]);
+            }
         else if(card.getValue() == Card::TWO && drawCount) {
-            if(hand[i].getValue() == Card::TWO ||  // mozna zagrac dwojke
+            if(hand[i].getValue() == Card::TWO ||  // you can play 2
               (hand[i].getValue() == Card::THREE && hand[i].getSuit() == card.getSuit() )) { //trojke tego samego koloru
                 playableCards.push_back(hand[i]);
             }

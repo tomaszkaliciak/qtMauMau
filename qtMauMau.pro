@@ -50,7 +50,8 @@ SOURCES += main.cpp\
     gameLogic/Test/gcproxy_mockup.cpp \
     gui/infodialog.cpp \
     gui/addremoteplayer.cpp \
-    gui/gamehistory.cpp
+    gui/gamehistory.cpp \
+    gui/choosevaluedialog.cpp
 
 
 
@@ -86,7 +87,8 @@ HEADERS  += mainwindow.h \
     gameLogic/Test/gcproxy_mockup.h \
     gui/infodialog.h \
     gui/addremoteplayer.h\
-    gui/gamehistory.h
+    gui/gamehistory.h \
+    gui/choosevaluedialog.h
 
 
 
@@ -98,7 +100,7 @@ FORMS    += \
     gui/setnamedialog.ui \
     gui/infodialog.ui \
     gui/addremoteplayer.ui \
-    gui/choosecvaluedialog.ui
+    gui/choosevaluedialog.ui
 
 
 TRANSLATIONS    = qtmaumau_de.ts \

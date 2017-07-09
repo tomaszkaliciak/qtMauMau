@@ -36,7 +36,7 @@ public:
      * @param topCard the top card of the card depot which his decision which card he plays is based on
      * @param wishedSuit Card::NONE or the wished suit of the to be played cards
      */
-    void doTurn(Card topCard, Card::cardSuit wishedSuit, bool& is4played, int drawCount, int toSkipCounter);
+    void doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool& is4played, int drawCount, int toSkipCounter);
     /**
      * @brief gameInit initializes the player before the game
      * @param hand the starting hand cards
@@ -48,7 +48,6 @@ public:
     void gameInit(const std::vector<Card> hand,
                   const Card& topCard,
                   std::map<PLAYER::Name, int> otherPlayerCardCount,
-                  Card::cardValue _wishSuitCard,
                   std::vector<std::string> playerNames);
     /**
      * @brief reciveCard is called when the player gets a card
@@ -73,14 +72,13 @@ signals:
     void UIinitPlayground(const std::vector<Card>& humanPlayerCards,
                           std::map<PLAYER::Name, int> otherPlayerCardCount,
                           const Card& topDepotCard,
-                          Card::cardValue wishSuitCard,
                           std::vector<std::string> playerNames);
     /**
      * @brief UIdoTurn emited to signal the view that the player can play or draw a card
      * @param playableCards the cards the player can play
      * @param wishedSuit the suit which is wished or Card::NONE
      */
-    void UIdoTurn(std::vector<Card> playableCards, Card::cardSuit wishedSuit);
+    void UIdoTurn(std::vector<Card> playableCards, Card::cardSuit wishedSuit, Card::cardValue whishedValue);
     /**
      * @brief UIplayerPlaysCard emited when an other player  plays a card
      * @param pName the player who played a card
@@ -110,7 +108,7 @@ slots:
      * @param card the played card
      * @param whishedSuit the wished suit or Card::NONE
      */
-    void UIplaysCard(const Card& card, Card::cardSuit whishedSuit);
+    void UIplaysCard(const Card& card, Card::cardSuit whishedSuit, Card::cardValue whishedValue);
     /**
      * @brief UIdrawsCard called when the player draws a card
      */

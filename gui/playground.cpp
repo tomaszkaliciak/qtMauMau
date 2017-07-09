@@ -81,8 +81,12 @@ void Playground::mousePressEvent(QGraphicsSceneMouseEvent* event)
                 if (c->createImg() == item && c->getPlayable()) {
                     history.write("You play a Card", c->getCard().getSuit(), c->getCard().getValue());
                     Card::cardSuit chosenColor = Card::NONE;
-                    if (c->getCard().getValue() == wishSuitCard) {
+                    Card::cardValue chosenValue = Card::NONEE;
+                    if (c->getCard().getValue() == Card::ACE) {
                         chosenColor = chooseColor();
+                    }
+                    else if (c->getCard().getValue() == Card::JACK) {
+                        chosenValue = chooseValue();
                     }
                     soundMgr.playCard();
                     updateDepotCard(*c, depot);
@@ -90,7 +94,7 @@ void Playground::mousePressEvent(QGraphicsSceneMouseEvent* event)
                     human->removeCard(c->getCard());
                     human->unsetPlayableCards();
                     human->setUnactive();
-                    emit playCard(depot.getCard(), chosenColor);
+                    emit playCard(depot.getCard(), chosenColor, chosenValue);
                 }
             }
         }
@@ -107,9 +111,8 @@ void Playground::mousePressEvent(QGraphicsSceneMouseEvent* event)
  * @param _wishSuitCard
  * @param playerNames
  */
-void Playground::initPlayground(const std::vector<Card> humanPlayerCards, std::map<PLAYER::Name, int> otherPlayerCardCount, const Card& topDepotCard, Card::cardValue _wishSuitCard, std::vector<std::string> playerNames)
+void Playground::initPlayground(const std::vector<Card> humanPlayerCards, std::map<PLAYER::Name, int> otherPlayerCardCount, const Card& topDepotCard, std::vector<std::string> playerNames)
 {
-    wishSuitCard = _wishSuitCard;
     createPlayer(humanPlayerCards, otherPlayerCardCount, playerNames);
     CardItem depotCard(topDepotCard);
     updateDepotCard(depotCard, depot);
@@ -227,10 +230,10 @@ void Playground::updatePlayerCard(CardItem& fromCard, CardItem& toCard, bool wit
  * @param playableCards
  * @param wishedSuit
  */
-void Playground::playerDoTurn(std::vector<Card> playableCards, Card::cardSuit wishedSuit)
+void Playground::playerDoTurn(std::vector<Card> playableCards, Card::cardSuit wishedSuit, Card::cardValue wishedValue)
 {
     history.write("You have to play, your Cards are:", players.value(PlayerItem::direction::HUMAN)->getCards());
-    players.value(PlayerItem::direction::HUMAN)->setActive(wishedSuit);
+    players.value(PlayerItem::direction::HUMAN)->setActive(wishedSuit,wishedValue);
     players.value(PlayerItem::direction::HUMAN)->setPlayableCards(playableCards);
 }
 
@@ -354,6 +357,13 @@ Card::cardSuit Playground::chooseColor()
     ChooseColorDialog dialog;
     return Card::cardSuit(dialog.exec());
 }
+
+Card::cardValue Playground::chooseValue()
+{
+    ChooseValueDialog dialog;
+    return Card::cardValue(dialog.exec());
+}
+
 
 /**
  * If we resize the scene, we have to rearrange all the players

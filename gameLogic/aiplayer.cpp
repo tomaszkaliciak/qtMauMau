@@ -19,30 +19,34 @@ void AIPlayer::otherDrawsCard(PLAYER::Name pName)
     (void)(pName);
 }
 
-void AIPlayer::doTurn(Card topCard, Card::cardSuit wishedSuit,bool& is4played, int drawCount, int toSkipCounter)
+void AIPlayer::doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool& is4played, int drawCount, int toSkipCounter)
 {
-    std::vector<Card> playableCards = getPlayableCards(topCard, wishedSuit, is4played,drawCount,toSkipCounter);
+    std::vector<Card> playableCards = getPlayableCards(topCard, wishedSuit, whishedValue, is4played,drawCount,toSkipCounter);
     if (playableCards.size() > 0) {
         //TODO ai choose better card
         Card playCard = getPlayCard(playableCards);
         Card::cardSuit aiWhischedSuit;
-        if (playCard.getValue() == wishSuitCard) {
+        Card::cardValue aiWhischedValue;
+
+        if (playCard.getValue() == Card::ACE) {
             aiWhischedSuit = getWhishedCardSuit();
-        } else {
+        }
+        else if(playCard.getValue() == Card::JACK) {
+            aiWhischedValue = getWhishedCardValue();
+        }
+        else {
             aiWhischedSuit = Card::NONE;
         }
         dropCard(playableCards.at(0));
-        gameController.playCard(playCard, aiWhischedSuit);
+        gameController.playCard(playCard, aiWhischedSuit, aiWhischedValue);
         topCard = playCard;
     } else {
-
         gameController.drawCard();
     }
 }
 
-void AIPlayer::gameInit(const std::vector<Card> hand, const Card& topCard, std::map<PLAYER::Name, int> otherPlayerCardCount, Card::cardValue _wishSuitCard, std::vector<std::string> playerNames)
+void AIPlayer::gameInit(const std::vector<Card> hand, const Card& topCard, std::map<PLAYER::Name, int> otherPlayerCardCount, std::vector<std::string> playerNames)
 {
-    wishSuitCard = _wishSuitCard;
     this->hand = hand;
     (void)(topCard);
     (void)(otherPlayerCardCount);
@@ -68,7 +72,7 @@ Card::cardSuit AIPlayer::getWhishedCardSuit()
 {
     int suitsCount[4] = { 0 };
     for (unsigned i = 0; i < hand.size(); ++i) {
-        if (hand[i].getValue() != wishSuitCard) {
+        if (hand[i].getValue() != Card::ACE) {
             suitsCount[hand[i].getSuit()]++;
         }
     }
@@ -81,4 +85,10 @@ Card::cardSuit AIPlayer::getWhishedCardSuit()
         }
     }
     return Card::cardSuit(maxIndex);
+}
+
+Card::cardValue AIPlayer::getWhishedCardValue()
+{
+    // TODO AI choose card
+    return Card::cardValue(4);
 }

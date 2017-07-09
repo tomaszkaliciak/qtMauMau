@@ -38,7 +38,7 @@ public:
     CardItem* findCard(const Card& card, bool returnLastCard = false);
     CardItem::specialCards getSpecialCard();
     QGraphicsTextItem* getPlayername();
-    void setActive(Card::cardSuit wishSuitCard = Card::cardSuit::NONE);
+    void setActive(Card::cardSuit wishSuitCard = Card::cardSuit::NONE, Card::cardValue wishValueCard = Card::cardValue::NONEE);
     void setUnactive();
     void rearrangePlayer(int xCenter, int yCenter);
     ~PlayerItem();

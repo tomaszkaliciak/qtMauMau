@@ -12,7 +12,6 @@ class GameControllerProxy {
 private:
     GameController* gameContr;
     PLAYER::Name pName;
-    Card::cardValue whishSuitCard;
 
 public:
     /**
@@ -26,7 +25,7 @@ public:
      * @param card the played card
      * @param whishedSuit the wished suit or Card::NONE
      */
-    void playCard(const Card& card, Card::cardSuit whishedSuit);
+    void playCard(const Card& card, Card::cardSuit whishedSuit, Card::cardValue whishedValue);
     /**
      * @brief drawCard calls draw card on the gamecontroller
      */

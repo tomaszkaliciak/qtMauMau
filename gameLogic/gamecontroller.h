@@ -49,6 +49,8 @@ private:
     bool changedDirection = false;
     Card::cardSuit wishedSuit = Card::NONE;
 
+    Card::cardValue wishedValue = Card::NONEE;
+
     int drawCount = 0;
 
     int toSkipCounter = 0;
@@ -91,7 +93,7 @@ public:
      * @param card the played card
      * @param whishedSuit the whised suit if the played card was a wish suit card or Card::NONE
      */
-    void playCard(PLAYER::Name pName, const Card& card, Card::cardSuit whishedSuit);
+    void playCard(PLAYER::Name pName, const Card& card, Card::cardSuit whishedSuit, Card::cardValue whishedValue);
     /**
      *
      * @brief drawCard called by a player if he wants to draw a card

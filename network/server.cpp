@@ -63,7 +63,8 @@ void MauServer::handleMessage(PLAYER::Name name, QString message)
     QStringList messageSplit = message.split(";");
     switch (MProtocol::toServer(messageSplit.at(0).toInt())) {
     case MProtocol::PLAY_CARD:
-        emit RemotePlaysCard(name, MProtocol::stingToCard(messageSplit.at(1)), Card::cardSuit(messageSplit.at(2).toInt()));
+        emit RemotePlaysCard(name, MProtocol::stingToCard(messageSplit.at(1)), Card::cardSuit(messageSplit.at(2).toInt()),
+                             Card::cardValue(messageSplit.at(3).toInt()));
         break;
     case MProtocol::DRAW_CARD:
         emit RemoteDrawsCard(name);
@@ -122,7 +123,7 @@ QList<MSocket*> MauServer::getClients() const
  * @param _wishSuitCard
  * @param playerNames
  */
-void MauServer::RemoteInitPlayground(PLAYER::Name remotePlayerName, const std::vector<Card> remotePlayerCards, std::map<PLAYER::Name, int> otherPlayerCardCount, const Card& topDepotCard, Card::cardValue _wishSuitCard, std::vector<std::string> playerNames)
+void MauServer::RemoteInitPlayground(PLAYER::Name remotePlayerName, const std::vector<Card> remotePlayerCards, std::map<PLAYER::Name, int> otherPlayerCardCount, const Card& topDepotCard, std::vector<std::string> playerNames)
 {
     assignSocket(remotePlayerName);
     QString message;
@@ -136,8 +137,6 @@ void MauServer::RemoteInitPlayground(PLAYER::Name remotePlayerName, const std::v
     message.append(";");
     message.append(MProtocol::cardToSting(topDepotCard));
     message.append(";");
-    message.append(QString::number(_wishSuitCard));
-    message.append(";");
     message.append(MProtocol::stringVecToSingle(playerNames));
     writeData(message, socketByName(remotePlayerName));
 }
@@ -147,7 +146,7 @@ void MauServer::RemoteInitPlayground(PLAYER::Name remotePlayerName, const std::v
  * @param playableCards
  * @param wishedSuit
  */
-void MauServer::RemoteDoTurn(PLAYER::Name remotePlayerName, std::vector<Card> playableCards, Card::cardSuit wishedSuit)
+void MauServer::RemoteDoTurn(PLAYER::Name remotePlayerName, std::vector<Card> playableCards, Card::cardSuit wishedSuit, Card::cardValue wishedValue)
 {
     QString message;
     message.append(QString::number(MProtocol::DO_TURN));
@@ -155,6 +154,8 @@ void MauServer::RemoteDoTurn(PLAYER::Name remotePlayerName, std::vector<Card> pl
     message.append(MProtocol::cardVectorToSting(playableCards));
     message.append(";");
     message.append(QString::number(wishedSuit));
+    message.append(";");
+    message.append(QString::number(wishedValue));
     writeData(message, socketByName(remotePlayerName));
 }
 /**

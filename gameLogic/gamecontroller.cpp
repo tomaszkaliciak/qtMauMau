@@ -44,17 +44,18 @@ void GameController::gameInit()
     }
     for (unsigned i = 0; i < players.size(); ++i) {
 
-        players[i]->gameInit(playerCards.at(i), cardDepot.back(), otherPlayerCardCount, wishSuitCard, getPlayerNames());
+        players[i]->gameInit(playerCards.at(i), cardDepot.back(), otherPlayerCardCount, getPlayerNames());
     }
-    players[playerOrder[0]]->doTurn(cardDepot.back(), Card::NONE, is4played, drawCount, toSkipCounter);
+    players[playerOrder[0]]->doTurn(cardDepot.back(), Card::NONE, Card::NONEE, is4played, drawCount, toSkipCounter);
 }
 
-void GameController::playCard(PLAYER::Name pName, const Card& card, Card::cardSuit whishedSuit)
+void GameController::playCard(PLAYER::Name pName, const Card& card, Card::cardSuit whishedSuit, Card::cardValue whishedValue)
 {
     if (playerOrder[0] == pName && !playerPlayed) {
 
         playerPlayed = true;
         this->wishedSuit = whishedSuit;
+        this->wishedValue = whishedValue;
         cardDepot.pushCard(card);
 
         for (unsigned i = 0; i < players.size(); ++i) {
@@ -67,7 +68,7 @@ void GameController::playCard(PLAYER::Name pName, const Card& card, Card::cardSu
             playerWon(playerOrder[0]);
         }
         if (players[playerOrder[1]]->skipPlayer()) {
-            setNextPlayer();
+        //    players[playerOrder[1]]->setNextPlayer();
         }
         nextTurn();
     }
@@ -89,7 +90,7 @@ void GameController::nextTurn()
         playerPlayed = false;
         setNextPlayer();
 
-        players[playerOrder[0]]->doTurn(cardDepot.back(), wishedSuit, is4played, drawCount, toSkipCounter);
+        players[playerOrder[0]]->doTurn(cardDepot.back(), wishedSuit, wishedValue, is4played, drawCount, toSkipCounter);
     } else {
         // na razie gra toczy sie az ktos nie wygra, (ktos wygra -> koniec gry)
     }
@@ -97,6 +98,11 @@ void GameController::nextTurn()
 
 void GameController::setFlags(const Card& card)
 {
+
+    if(cardDepot.back().getValue() == Card::FOUR) {
+            ++toSkipCounter;
+    }
+
     if (card.getValue() == changeDirectCard) {
         if (changedDirection) {
             changedDirection = false;
@@ -123,10 +129,6 @@ void GameController::setFlags(const Card& card)
     }
     else {
         handleMultiDraw();
-    }
-
-    if(cardDepot.back().getValue() == Card::FOUR) {
-            ++toSkipCounter;
     }
 }
 

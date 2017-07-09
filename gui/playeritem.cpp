@@ -183,13 +183,23 @@ void PlayerItem::unsetPlayableCards()
  * @brief PlayerItem::setActive
  * @param wishSuitCard what is the whised suit?
  */
-void PlayerItem::setActive(Card::cardSuit wishSuitCard)
+void PlayerItem::setActive(Card::cardSuit wishSuitCard, Card::cardValue wishValueCard)
 {
     switch(wishSuitCard){
     case Card::cardSuit::HEARTS: wish = "♥"; break;
     case Card::cardSuit::DIAMONDS: wish = "♦"; break;
     case Card::cardSuit::CLUBS: wish = "♣"; break;
     case Card::cardSuit::SPADES: wish = "♠"; break;
+    default: wish = ""; break;
+    }
+    switch(wishValueCard){
+    case Card::cardValue::FIVE: wish = "5"; break;
+    case Card::cardValue::SIX: wish = "6"; break;
+    case Card::cardValue::SEVEN: wish = "7"; break;
+    case Card::cardValue::EIGHT: wish = "8"; break;
+    case Card::cardValue::NINE: wish = "9"; break;
+    case Card::cardValue::TEN: wish = "10"; break;
+    case Card::cardValue::QUEEN: wish = "Q"; break;
     default: wish = ""; break;
     }
 

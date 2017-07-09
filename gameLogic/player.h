@@ -37,6 +37,7 @@ protected:
      * @brief wishSuitCard the card a player can wish a suit when he plays a card with this vlaue
      */
     Card::cardValue wishSuitCard;
+
     /**
      * @brief gameController the gamecontroller proxy used to communicate with the gamecontroller
      */
@@ -73,7 +74,7 @@ public:
      * @param topCard the top card of the card depot which his decision which card he plays is based on
      * @param wishedSuit Card::NONE or the wished suit of the to be played cards
      */
-    virtual void doTurn(Card topCard, Card::cardSuit wishedSuit, bool& is4played,int drawCount, int toSkipCounter) = 0;
+    virtual void doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool& is4played,int drawCount, int toSkipCounter) = 0;
     /**
      * @brief gameInit initializes the player before the game
      * @param hand the starting hand cards
@@ -85,7 +86,6 @@ public:
     virtual void gameInit(const std::vector<Card> hand,
                           const Card& topCard,
                           std::map<PLAYER::Name, int> otherPlayerCardCount,
-                          Card::cardValue _wishSuitCard,
                           std::vector<std::string> playerNames) = 0;
     /**
      * @brief reciveCard is called when the player gets a card
@@ -122,7 +122,7 @@ protected:
      * @param wishedSuit the wished suit or Card::NONE
      * @return  a vector of cards which can be played, based on the given card and the given wished suit
      */
-    std::vector<Card> getPlayableCards(const Card& card, Card::cardSuit wishedSuit, bool& is4played, int drawCount, int &toSkipCounter);
+    std::vector<Card> getPlayableCards(const Card& card, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool& is4played, int drawCount, int &toSkipCounter);
     /**
      * @brief dropCard the player drops the given card
      * @param card the card to be dropped

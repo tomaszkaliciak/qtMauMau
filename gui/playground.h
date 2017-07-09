@@ -21,6 +21,7 @@
 #include <gui/playeritem.h>
 #include <gui/animatedgraphicsscene.h>
 #include <gui/choosecolordialog.h>
+#include <gui/choosevaluedialog.h>
 #include <gameLogic/playername.h>
 #include <settings.h>
 #include <gui/soundmanager.h>
@@ -52,6 +53,8 @@ private:
     void updatePlayerCard(CardItem& fromCard, CardItem &toCard, bool withAnimation = true);
     void createPlayer(const std::vector<Card> humanPlayerCards, std::map<PLAYER::Name, int> otherPlayerCardCount, std::vector<std::string> playerNames);
     Card::cardSuit chooseColor();
+    Card::cardValue chooseValue();
+
 
     GameHistory history;
     SoundManager soundMgr;
@@ -70,11 +73,10 @@ slots:
     void initPlayground(const std::vector<Card> humanPlayerCards,
                         std::map<PLAYER::Name, int> otherPlayerCardCount,
                         const Card& topDepotCard,
-                        Card::cardValue _wishSuitCard,
                         std::vector<std::string> playerNames);
     //bekomme alle Karten und anzahl karten der anderen Mitspieler
 
-    void playerDoTurn(std::vector<Card> playableCards, Card::cardSuit wishedSuit);
+    void playerDoTurn(std::vector<Card> playableCards, Card::cardSuit wishedSuit, Card::cardValue wishedValue);
     // bekomme alle Spielbaren Karten von Human player
 
     void playerPlaysCard(PLAYER::Name player, const Card& playedCard);
@@ -89,7 +91,7 @@ slots:
     void playerWon(std::string _title);
 
 signals:
-    void playCard(const Card& card, Card::cardSuit whishedSuit);
+    void playCard(const Card& card, Card::cardSuit whishedSuit, Card::cardValue wishedValue);
     void drawCard();
 };
 
