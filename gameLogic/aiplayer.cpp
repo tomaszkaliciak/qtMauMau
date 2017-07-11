@@ -30,12 +30,15 @@ void AIPlayer::doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue w
 
         if (playCard.getValue() == Card::ACE) {
             aiWhischedSuit = getWhishedCardSuit();
+            aiWhischedValue = Card::NONEE;
         }
         else if(playCard.getValue() == Card::JACK) {
             aiWhischedValue = getWhishedCardValue();
+            aiWhischedSuit = Card::NONE;
         }
         else {
             aiWhischedSuit = Card::NONE;
+            aiWhischedValue = Card::NONEE;
         }
         dropCard(playableCards.at(0));
         gameController.playCard(playCard, aiWhischedSuit, aiWhischedValue);

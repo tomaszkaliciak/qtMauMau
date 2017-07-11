@@ -14,6 +14,7 @@ public:
     };
 
     enum cardValue {
+        NONEE = -1,
         TWO = 1,
         THREE = 2,
         FOUR = 3,
@@ -27,7 +28,6 @@ public:
         QUEEN = 11,
         KING = 12,
         ACE = 13,
-        NONEE = 14
     };
 
 private:

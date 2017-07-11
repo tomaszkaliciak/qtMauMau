@@ -30,7 +30,7 @@ Player::~Player()
 
 }
 
-std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool& is4played, int drawCount, int& toSkipCounter)
+std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wishedSuit, Card::cardValue wishedValue, bool& is4played, int drawCount, int& toSkipCounter)
 {
     std::vector<Card> playableCards;
     for (unsigned i = 0; i < hand.size(); ++i) {
@@ -46,12 +46,16 @@ std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wish
                 is4played = false;
             }
         }
-       else if (card.getValue() == Card::ACE && (card.getValue() == hand[i].getValue() || wishedSuit == hand[i].getSuit())) {
+       else if (card.getValue() == Card::ACE) {
+            if(Card::ACE == hand[i].getValue() || wishedSuit == hand[i].getSuit()){
                 playableCards.push_back(hand[i]);
-        }
-        else if (card.getValue() == Card::JACK && (card.getValue() == hand[i].getValue() || whishedValue == hand[i].getSuit())) {
-                 playableCards.push_back(hand[i]);
             }
+        }
+        else if (card.getValue() == Card::JACK) {
+             if(Card::JACK == hand[i].getValue() || wishedValue == hand[i].getValue()){
+                 playableCards.push_back(hand[i]);
+             }
+         }
         else if(card.getValue() == Card::TWO && drawCount) {
             if(hand[i].getValue() == Card::TWO ||  // you can play 2
               (hand[i].getValue() == Card::THREE && hand[i].getSuit() == card.getSuit() )) { //trojke tego samego koloru

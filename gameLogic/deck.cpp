@@ -15,16 +15,17 @@ Deck::Deck(Deck::InitStatus status)
     }
 }
 
-/*
- * http://bost.ocks.org/mike/shuffle/
- *
- */
 void Deck::shuffleManager() {
     shuffle();
     while(cards.back().isFunctional()) {
         shuffle();
     }
 }
+
+/*
+ * http://bost.ocks.org/mike/shuffle/
+ *
+ */
 
 void Deck::shuffle()
 {
