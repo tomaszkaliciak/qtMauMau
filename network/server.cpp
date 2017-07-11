@@ -235,7 +235,7 @@ QTcpSocket* MauServer::socketByName(PLAYER::Name pName)
             return clients.at(i)->getSocket();
         }
     }
-    return NULL;
+    return nullptr;
 }
 /**
  * @brief MauServer::assignSocket assigns the next free socket to the given name

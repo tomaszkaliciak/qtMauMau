@@ -235,7 +235,7 @@ CardItem* PlayerItem::addCard(const Card& card)
         x += cardGap;
     }
 
-    CardItem* cardItem = NULL;
+    CardItem* cardItem = nullptr;
     if (this->playerDirection == PlayerItem::direction::HUMAN) {
         cardItem = new CardItem(card);
     } else {
@@ -284,7 +284,7 @@ CardItem* PlayerItem::findCard(const Card& card, bool returnLastCard)
     if(returnLastCard){
         return cards->last();
     }
-    return NULL;
+    return nullptr;
 }
 
 /**
@@ -321,14 +321,14 @@ QGraphicsTextItem* PlayerItem::getPlayername()
 
 PlayerItem::~PlayerItem()
 {
-    if(cards != NULL){
+    if(cards != nullptr){
     for(int i = 0; i < cards->size();i++){
-        if(cards->at(i) != NULL)
+        if(cards->at(i) != nullptr)
         delete cards->at(i);
     }
     delete cards;
     }
 
-    if(playername != NULL)
+    if(playername != nullptr)
         delete playername;
 }

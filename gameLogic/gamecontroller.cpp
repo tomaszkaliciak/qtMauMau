@@ -10,7 +10,7 @@ GameController::GameController()
 GameController::~GameController()
 {
     for (unsigned i = 0; i < players.size(); ++i) {
-        if (players.at(i) != NULL)
+        if (players.at(i) != nullptr)
             delete players.at(i);
     }
 }
@@ -111,7 +111,7 @@ void GameController::setFlags(const Card& card)
         }
     }
 
-    if (card.getValue() == Card::TWO || card.getValue() == Card::THREE ) {
+    if (card.getValue() == Card::TWO || card.getValue() == Card::THREE) {
         if (card.getValue() == Card::TWO && drawCount) {
             drawCount += 2;
         }
@@ -125,6 +125,14 @@ void GameController::setFlags(const Card& card)
             else {
                 drawCount = 2;
             }
+        }
+    }
+    else if(card.getValue() == Card::KING && card.getSuit() == Card::HEARTS) { // krol serce
+        if(drawCount) {
+            drawCount += 5;
+        }
+        else {
+            drawCount = 4;
         }
     }
     else {

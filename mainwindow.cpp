@@ -21,10 +21,10 @@ MainWindow::MainWindow(QWidget* parent)
  */
 void MainWindow::setupGraphicsView()
 {
-    if (playground != NULL) {
+    if (playground != nullptr) {
         delete playground;
     }
-    if (gc != NULL) {
+    if (gc != nullptr) {
         delete gc;
     }
 
@@ -37,7 +37,7 @@ void MainWindow::setupGraphicsView()
 
 void MainWindow::resizeEvent(QResizeEvent* event)
 {
-    if (playground != NULL) {
+    if (playground != nullptr) {
         playground->setSceneRect(0, 0, event->size().width() - 50, event->size().height() - 50);
         playground->rearrangeLayout();
     }
@@ -188,10 +188,10 @@ void MainWindow::startGameAsLocal()
  */
 void MainWindow::startGameAsServerDialog()
 {
-    if (server != NULL) {
+    if (server != nullptr) {
         delete server;
     }
-    if (client != NULL) {
+    if (client != nullptr) {
         delete client;
     }
     server = new MauServer();
@@ -285,22 +285,22 @@ void MainWindow::toggleFullscreen()
 
 MainWindow::~MainWindow()
 {
-    if (playground != NULL)
+    if (playground != nullptr)
         delete playground;
-    if (gc != NULL)
+    if (gc != nullptr)
         delete gc;
-    if (optionDialog != NULL)
+    if (optionDialog != nullptr)
         delete optionDialog;
-    if (connectToServer != NULL)
+    if (connectToServer != nullptr)
         delete connectToServer;
-    if (createServerDialog != NULL)
+    if (createServerDialog != nullptr)
         delete createServerDialog;
-    if (infoDialog != NULL)
+    if (infoDialog != nullptr)
         delete infoDialog;
-    if (server != NULL)
+    if (server != nullptr)
         delete server;
-    if (client != NULL)
+    if (client != nullptr)
         delete client;
-    if (view != NULL)
+    if (view != nullptr)
         delete view;
 }

@@ -66,7 +66,7 @@ void Playground::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton) {
         QGraphicsItem* item = itemAt(event->buttonDownScenePos(event->button()), QTransform());
-        if (item != NULL) {
+        if (item != nullptr) {
 
             //Clicked on Stack
             if (item == stack.createImg()) {
@@ -213,7 +213,7 @@ void Playground::updatePlayerCard(CardItem& fromCard, CardItem& toCard, bool wit
         startAnimation();
         pause.exec();
     }
-    if ((&toCard) != NULL) {
+    if ((&toCard) != nullptr) {
     }
     toCard = CardItem(fromCard);
     toCard.setPos(x, y);
@@ -245,7 +245,7 @@ void Playground::playerDoTurn(std::vector<Card> playableCards, Card::cardSuit wi
  */
 void Playground::playerPlaysCard(PLAYER::Name player, const Card& playedCard)
 {
-    PlayerItem* p = NULL;
+    PlayerItem* p = nullptr;
     switch (player) {
     case PLAYER::Name::LEFT: {
         p = players.value(PlayerItem::direction::LEFT);
@@ -353,7 +353,6 @@ void Playground::playerWon(std::string _title)
  */
 Card::cardSuit Playground::chooseColor()
 {
-
     ChooseColorDialog dialog;
     return Card::cardSuit(dialog.exec());
 }
@@ -384,15 +383,15 @@ void Playground::rearrangeLayout()
 Playground::~Playground()
 {
     for (CardItem* items : graphicalItems) {
-        if (items != NULL)
+        if (items != nullptr)
             delete items;
     }
 
     for (PlayerItem* player : players) {
-        if (player != NULL)
+        if (player != nullptr)
             delete player;
     }
-    if(textItem != NULL){
+    if(textItem != nullptr){
         delete textItem;
     }
 }

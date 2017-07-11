@@ -90,7 +90,7 @@ void AnimatedGraphicsScene::animationEnded()
         delete timeLine;
 
 /*
-        if(newAnimation != NULL && newAnimation->item() != NULL){
+        if(newAnimation != nullptr && newAnimation->item() != nullptr){
             newAnimation->item()->setZValue(0);
         }
   */

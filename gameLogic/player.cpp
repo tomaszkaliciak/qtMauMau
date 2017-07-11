@@ -57,14 +57,22 @@ std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wish
              }
          }
         else if(card.getValue() == Card::TWO && drawCount) {
-            if(hand[i].getValue() == Card::TWO ||  // you can play 2
-              (hand[i].getValue() == Card::THREE && hand[i].getSuit() == card.getSuit() )) { //trojke tego samego koloru
+            if(hand[i].getValue() == Card::TWO                                           ||  // moza zagrac dwojke
+              (hand[i].getValue() == Card::THREE && hand[i].getSuit() == card.getSuit()) || //trojke tego samego koloru
+              (hand[i].getValue() == Card::KING && hand[i].getSuit() == Card::HEARTS)) {     // krola serce
                 playableCards.push_back(hand[i]);
             }
         }
         else if(card.getValue() == Card::THREE && drawCount) {
-            if(hand[i].getValue() == Card::THREE ||  // mozna zagrac trójke
-              (hand[i].getValue() == Card::TWO && hand[i].getSuit() == card.getSuit() )) { //dwojke tego samego koloru
+            if(hand[i].getValue() == Card::THREE                                         ||  // mozna zagrac trójke
+              (hand[i].getValue() == Card::TWO && hand[i].getSuit() == card.getSuit())   ||  //dwojke tego samego koloru
+              (hand[i].getValue() == Card::KING && hand[i].getSuit() == Card::HEARTS)) {      // krola serce
+                playableCards.push_back(hand[i]);
+            }
+        }
+        else if(card.getValue() == Card::KING && card.getSuit() == Card::HEARTS && drawCount) { // krol serce
+            if((hand[i].getValue() == Card::TWO && hand[i].getSuit() == card.getSuit())     ||  // dwojke serce
+              (hand[i].getValue() == Card::THREE && hand[i].getSuit() == card.getSuit())) {    // trojke serce
                 playableCards.push_back(hand[i]);
             }
         }

@@ -51,7 +51,7 @@ private:
     std::string imgExtension;
     std::string deckNumber;
     CardItem::specialCards specialCode = specialCards::NOT_USED;
-    QGraphicsPixmapItem *graphicsItem = NULL;
+    QGraphicsPixmapItem *graphicsItem = nullptr;
     qreal x = 0;
     qreal y = 0;
     Card card;

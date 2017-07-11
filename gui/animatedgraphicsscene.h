@@ -27,7 +27,7 @@ protected:
     QQueue<QTimeLine *> _activeTimeLines;
     QTimeLine *timeLine;
     bool _animationActive;
-    QGraphicsItemAnimation *newAnimation = NULL;
+    QGraphicsItemAnimation *newAnimation = nullptr;
     QEventLoop *eventLoop;
 
     QMap<QGraphicsItem*, QPointF> _destinationPositions;

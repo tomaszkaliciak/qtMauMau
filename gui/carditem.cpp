@@ -40,12 +40,12 @@ CardItem::CardItem(CardItem::specialCards _specialCode)
  * @param _cardItem
  */
 CardItem::CardItem(const CardItem& _cardItem)
-    : graphicsItem(NULL)
+    : graphicsItem(nullptr)
     , x(_cardItem.getX())
     , y(_cardItem.getY())
     , card(_cardItem.getCard())
 {
-    if (graphicsItem != NULL) {
+    if (graphicsItem != nullptr) {
         graphicsItem->setPos(_cardItem.getX(), _cardItem.getY());
     }
     specialCode = _cardItem.getSpecialCode();
@@ -65,9 +65,9 @@ CardItem& CardItem::operator=(const CardItem& _cardItem)
     specialCode = _cardItem.getSpecialCode();
 
     //neu erstellen des Bildes
-    if(graphicsItem != NULL){
+    if(graphicsItem != nullptr){
         delete graphicsItem;
-        graphicsItem = NULL;
+        graphicsItem = nullptr;
    }
 
     createImg();
@@ -86,7 +86,7 @@ void CardItem::setPos(qreal _x, qreal _y)
 {
     x = _x;
     y = _y;
-    if (graphicsItem != NULL) {
+    if (graphicsItem != nullptr) {
         graphicsItem->setPos(x, y);
     }
 }
@@ -140,7 +140,7 @@ QGraphicsPixmapItem* CardItem::createImg()
     deckNumber = Settings::getInstance()->getProperty("common/card_deck").toStdString();
     imgExtension = Settings::getInstance()->getProperty("common/card_img_extension").toStdString();
 
-    if (graphicsItem == NULL) {
+    if (graphicsItem == nullptr) {
         std::string fullImagePath;
         std::string imgName("");
         if (specialCode != specialCards::NOT_USED) {
