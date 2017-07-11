@@ -78,6 +78,9 @@ void GameController::drawCard(PLAYER::Name pName)
 {
     if (playerOrder[0] == pName && !playerPlayed) {
         playerPlayed = true;
+        if (changedDirection) {
+            changedDirection = false;
+        }
         playerDrawCard(pName);
         handleMultiDraw();
         nextTurn();
@@ -102,15 +105,9 @@ void GameController::setFlags(const Card& card)
     if(cardDepot.back().getValue() == Card::FOUR) {
             ++toSkipCounter;
     }
-
-    if (card.getValue() == changeDirectCard) {
-        if (changedDirection) {
-            changedDirection = false;
-        } else {
-            changedDirection = true;
-        }
+    if (changedDirection) {
+        changedDirection = false;
     }
-
     if (card.getValue() == Card::TWO || card.getValue() == Card::THREE) {
         if (card.getValue() == Card::TWO && drawCount) {
             drawCount += 2;
@@ -127,7 +124,10 @@ void GameController::setFlags(const Card& card)
             }
         }
     }
-    else if(card.getValue() == Card::KING && card.getSuit() == Card::HEARTS) { // krol serce
+    else if(card.getValue() == Card::KING && (card.getSuit() == Card::HEARTS || card.getSuit() == Card::SPADES )) { // krol serce lub wino
+        if(card.getSuit() == Card::SPADES) { // krol wino żąda od poprzedniego gracza
+            changedDirection = true;
+        }
         if(drawCount) {
             drawCount += 5;
         }
