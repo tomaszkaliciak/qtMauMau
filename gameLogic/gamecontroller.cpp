@@ -135,6 +135,9 @@ void GameController::setFlags(const Card& card)
             drawCount = 4;
         }
     }
+    else if(card.getValue() == Card::QUEEN || card.getSuit() == Card::SPADES) {  //dama wino
+        drawCount = 0;
+    }
     else {
         handleMultiDraw();
     }

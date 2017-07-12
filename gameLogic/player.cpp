@@ -46,13 +46,17 @@ std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wish
                 is4played = false;
             }
         }
-       else if (card.getValue() == Card::ACE) {
-            if(Card::ACE == hand[i].getValue() || wishedSuit == hand[i].getSuit()){
+       else if (card.getValue() == Card::ACE) {                                              // as na stole
+            if(Card::ACE == hand[i].getValue()                                     ||        // można zagrać asa
+               wishedSuit == hand[i].getSuit()                                     ||        // zadany kolor
+               (hand[i].getValue() == Card::QUEEN && hand[i].getSuit() == Card::SPADES))  {  // dame wino
                 playableCards.push_back(hand[i]);
             }
         }
-        else if (card.getValue() == Card::JACK) {
-             if(Card::JACK == hand[i].getValue() || wishedValue == hand[i].getValue()){
+        else if (card.getValue() == Card::JACK) {                                            // jopek na stole
+             if(Card::JACK == hand[i].getValue()                                   ||        // mozna zagrac jopka
+                wishedValue == hand[i].getValue()                                  ||        // zadana karte
+                (hand[i].getValue() == Card::QUEEN && hand[i].getSuit() == Card::SPADES)) {  // dame wino
                  playableCards.push_back(hand[i]);
              }
          }
@@ -60,8 +64,8 @@ std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wish
             if(hand[i].getValue() == Card::TWO                                           ||  // moza zagrac dwojke
               (hand[i].getValue() == Card::THREE && hand[i].getSuit() == card.getSuit()) || //trojke tego samego koloru
               (hand[i].getValue() == Card::KING && hand[i].getSuit() == Card::HEARTS && card.getSuit() == Card::HEARTS )  ||   // krola serce jezeli na stosie 2 serce
-              (hand[i].getValue() == Card::KING && hand[i].getSuit() == Card::SPADES && card.getSuit() == Card::SPADES )) {    // krola wino jezeli na stosie 2 wino
-
+              (hand[i].getValue() == Card::KING && hand[i].getSuit() == Card::SPADES && card.getSuit() == Card::SPADES )  ||    // krola wino jezeli na stosie 2 wino
+              (hand[i].getValue() == Card::QUEEN && hand[i].getSuit() == Card::SPADES)) {   // dame wino
                     playableCards.push_back(hand[i]);
             }
         }
@@ -69,8 +73,9 @@ std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wish
             if(hand[i].getValue() == Card::THREE                                         ||  // mozna zagrac trójke
               (hand[i].getValue() == Card::TWO && hand[i].getSuit() == card.getSuit())   ||  //dwojke tego samego koloru
               (hand[i].getValue() == Card::KING && hand[i].getSuit() == Card::HEARTS && card.getSuit() == Card::HEARTS )  ||   // krola serce jezeli na stosie 3 serce
-              (hand[i].getValue() == Card::KING && hand[i].getSuit() == Card::SPADES && card.getSuit() == Card::SPADES )) {    // krola wino jezeli na stosie 3 wino
-                playableCards.push_back(hand[i]);
+              (hand[i].getValue() == Card::KING && hand[i].getSuit() == Card::SPADES && card.getSuit() == Card::SPADES )  ||    // krola wino jezeli na stosie 3 wino
+              (hand[i].getValue() == Card::QUEEN && hand[i].getSuit() == Card::SPADES)) {    // dame wino
+                    playableCards.push_back(hand[i]);
             }
         }
         else if(card.getValue() == Card::KING &&
@@ -79,9 +84,13 @@ std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wish
             if((hand[i].getValue() == Card::TWO && hand[i].getSuit() == card.getSuit())     ||  // dwojke serce
               (hand[i].getValue() == Card::THREE && hand[i].getSuit() == card.getSuit())    ||  // trojke serce
               (hand[i].getValue() == Card::KING && hand[i].getSuit() == Card::HEARTS)       ||  // krol serce
-              (hand[i].getValue() == Card::KING && hand[i].getSuit() == Card::SPADES)) {        // krol wino
+              (hand[i].getValue() == Card::KING && hand[i].getSuit() == Card::SPADES)       ||  // krol wino
+              (hand[i].getValue() == Card::QUEEN && hand[i].getSuit() == Card::SPADES)) {       // dama wino
                 playableCards.push_back(hand[i]);
             }
+        }
+        else if(card.getValue() == Card::QUEEN && card.getSuit() == Card::SPADES) { // dama wino
+            playableCards.push_back(hand[i]);                                       // wszystko na dame
         }
         else {
             if (card.getValue() == hand[i].getValue() || card.getSuit() == hand[i].getSuit()) {
