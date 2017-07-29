@@ -19,9 +19,9 @@ void AIPlayer::otherDrawsCard(PLAYER::Name pName)
     (void)(pName);
 }
 
-void AIPlayer::doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool& is4played, int drawCount, int toSkipCounter)
+void AIPlayer::doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool is4played, int drawCount)
 {
-    std::vector<Card> playableCards = getPlayableCards(topCard, wishedSuit, whishedValue, is4played,drawCount,toSkipCounter);
+    std::vector<Card> playableCards = getPlayableCards(topCard, wishedSuit, whishedValue, is4played,drawCount);
     if (playableCards.size() > 0) {
         //TODO ai choose better card
         Card playCard = getPlayCard(playableCards);

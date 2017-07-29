@@ -47,9 +47,10 @@ protected:
      */
     std::string title;
 
-    int roundsToSkip = 0;
+
 
 public:
+        int roundsToSkip = 0;
     /**
      * @brief Player creates a player
      * @param playerName name or direction of the player
@@ -74,7 +75,7 @@ public:
      * @param topCard the top card of the card depot which his decision which card he plays is based on
      * @param wishedSuit Card::NONE or the wished suit of the to be played cards
      */
-    virtual void doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool& is4played,int drawCount, int toSkipCounter) = 0;
+    virtual void doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool is4played,int drawCount) = 0;
     /**
      * @brief gameInit initializes the player before the game
      * @param hand the starting hand cards
@@ -113,7 +114,7 @@ public:
      */
     std::string getTitle() const;
 
-    bool skipPlayer();
+    std::vector<Card> getPlayableCards(const Card& card, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool is4played, int drawCount);
 
 protected:
     /**
@@ -122,7 +123,6 @@ protected:
      * @param wishedSuit the wished suit or Card::NONE
      * @return  a vector of cards which can be played, based on the given card and the given wished suit
      */
-    std::vector<Card> getPlayableCards(const Card& card, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool& is4played, int drawCount, int &toSkipCounter);
     /**
      * @brief dropCard the player drops the given card
      * @param card the card to be dropped

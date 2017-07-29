@@ -30,20 +30,17 @@ Player::~Player()
 
 }
 
-std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wishedSuit, Card::cardValue wishedValue, bool& is4played, int drawCount, int& toSkipCounter)
+std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wishedSuit, Card::cardValue wishedValue, bool is4played, int drawCount)
 {
     std::vector<Card> playableCards;
+    if(roundsToSkip) {
+        return playableCards;
+    }
     for (unsigned i = 0; i < hand.size(); ++i) {
         if(card.getValue() == Card::FOUR && is4played) { // czwórka na stole
-            if(hand[i].getValue() == Card::FOUR) {  // czwórka w rece
+            if(hand[i].getValue() == Card::FOUR ||  // czwórka w rece
+               (hand[i].getValue() == Card::QUEEN && hand[i].getSuit() == Card::SPADES)) {  // dama wino
                 playableCards.push_back(hand[i]);
-                std::cout << "Nazywam sie " << getTitle() << " wartosc licznika " << toSkipCounter << std::endl;
-            }
-            else {
-                roundsToSkip = toSkipCounter;
-                toSkipCounter = 0;
-                std::cout << "Nazywam sie " << getTitle() << " i czekam " << roundsToSkip << std::endl;
-                is4played = false;
             }
         }
        else if (card.getValue() == Card::ACE) {                                              // as na stole
@@ -60,16 +57,16 @@ std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wish
                  playableCards.push_back(hand[i]);
              }
          }
-        else if(card.getValue() == Card::TWO && drawCount) {
+        else if(card.getValue() == Card::TWO && drawCount) {                                 // dwojka na stole
             if(hand[i].getValue() == Card::TWO                                           ||  // moza zagrac dwojke
-              (hand[i].getValue() == Card::THREE && hand[i].getSuit() == card.getSuit()) || //trojke tego samego koloru
+              (hand[i].getValue() == Card::THREE && hand[i].getSuit() == card.getSuit()) ||  //trojke tego samego koloru
               (hand[i].getValue() == Card::KING && hand[i].getSuit() == Card::HEARTS && card.getSuit() == Card::HEARTS )  ||   // krola serce jezeli na stosie 2 serce
               (hand[i].getValue() == Card::KING && hand[i].getSuit() == Card::SPADES && card.getSuit() == Card::SPADES )  ||    // krola wino jezeli na stosie 2 wino
               (hand[i].getValue() == Card::QUEEN && hand[i].getSuit() == Card::SPADES)) {   // dame wino
                     playableCards.push_back(hand[i]);
             }
         }
-        else if(card.getValue() == Card::THREE && drawCount) {
+        else if(card.getValue() == Card::THREE && drawCount) {                               // trojka na stole
             if(hand[i].getValue() == Card::THREE                                         ||  // mozna zagrac trójke
               (hand[i].getValue() == Card::TWO && hand[i].getSuit() == card.getSuit())   ||  //dwojke tego samego koloru
               (hand[i].getValue() == Card::KING && hand[i].getSuit() == Card::HEARTS && card.getSuit() == Card::HEARTS )  ||   // krola serce jezeli na stosie 3 serce
@@ -93,7 +90,8 @@ std::vector<Card> Player::getPlayableCards(const Card& card, Card::cardSuit wish
             playableCards.push_back(hand[i]);                                       // wszystko na dame
         }
         else {
-            if (card.getValue() == hand[i].getValue() || card.getSuit() == hand[i].getSuit()) {
+            if (card.getValue() == hand[i].getValue() || card.getSuit() == hand[i].getSuit() ||
+                 (hand[i].getValue() == Card::QUEEN && hand[i].getSuit() == Card::SPADES)) {
                 playableCards.push_back(hand[i]);
             }
 
@@ -113,12 +111,3 @@ void Player::dropCard(const Card& card)
     }
 }
 
-bool Player::skipPlayer() {
-    if(roundsToSkip) {
-        --roundsToSkip;
-        return true;
-    }
-    else {
-        return false;
-    }
-}

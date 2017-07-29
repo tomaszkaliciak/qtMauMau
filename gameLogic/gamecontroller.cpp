@@ -46,7 +46,7 @@ void GameController::gameInit()
 
         players[i]->gameInit(playerCards.at(i), cardDepot.back(), otherPlayerCardCount, getPlayerNames());
     }
-    players[playerOrder[0]]->doTurn(cardDepot.back(), Card::NONE, Card::NONEE, is4played, drawCount, toSkipCounter);
+    players[playerOrder[0]]->doTurn(cardDepot.back(), Card::NONE, Card::NONEE, is4played, drawCount);
 }
 
 void GameController::playCard(PLAYER::Name pName, const Card& card, Card::cardSuit whishedSuit, Card::cardValue whishedValue)
@@ -67,9 +67,7 @@ void GameController::playCard(PLAYER::Name pName, const Card& card, Card::cardSu
         if (!players[playerOrder[0]]->getCardCount()) {
             playerWon(playerOrder[0]);
         }
-        if (players[playerOrder[1]]->skipPlayer()) {
-        //    players[playerOrder[1]]->setNextPlayer();
-        }
+
         nextTurn();
     }
 }
@@ -78,6 +76,25 @@ void GameController::drawCard(PLAYER::Name pName)
 {
     if (playerOrder[0] == pName && !playerPlayed) {
         playerPlayed = true;
+
+        if(players[playerOrder[0]]->roundsToSkip) { // czeka kolejna kolejke
+        players[playerOrder[0]]->roundsToSkip -= 1;
+        is4played = false;
+        std::cout << players[playerOrder[0]]->getTitle() << " czeka jeszcze " << players[playerOrder[0]]->roundsToSkip << std::endl;
+        nextTurn();
+        return;
+        }
+
+        else if(toSkipCounter) { // pierwszy raz czeka
+        players[playerOrder[0]]->roundsToSkip = toSkipCounter - 1;
+        std::cout << players[playerOrder[0]]->getTitle() << " bedzie czekal jeszcze  " << players[playerOrder[0]]->roundsToSkip<< std::endl;
+
+        toSkipCounter = 0;
+        is4played = false;
+        nextTurn();
+        return;
+        }
+
         if (changedDirection) {
             changedDirection = false;
         }
@@ -93,7 +110,7 @@ void GameController::nextTurn()
         playerPlayed = false;
         setNextPlayer();
 
-        players[playerOrder[0]]->doTurn(cardDepot.back(), wishedSuit, wishedValue, is4played, drawCount, toSkipCounter);
+        players[playerOrder[0]]->doTurn(cardDepot.back(), wishedSuit, wishedValue, is4played, drawCount);
     } else {
         // na razie gra toczy sie az ktos nie wygra, (ktos wygra -> koniec gry)
     }
@@ -101,10 +118,6 @@ void GameController::nextTurn()
 
 void GameController::setFlags(const Card& card)
 {
-
-    if(cardDepot.back().getValue() == Card::FOUR) {
-            ++toSkipCounter;
-    }
     if (changedDirection) {
         changedDirection = false;
     }
@@ -124,6 +137,10 @@ void GameController::setFlags(const Card& card)
             }
         }
     }
+    else if(card.getValue() == Card::FOUR) {
+        is4played = true;
+        ++toSkipCounter;
+    }
     else if(card.getValue() == Card::KING && (card.getSuit() == Card::HEARTS || card.getSuit() == Card::SPADES )) { // krol serce lub wino
         if(card.getSuit() == Card::SPADES) { // krol wino żąda od poprzedniego gracza
             changedDirection = true;
@@ -137,6 +154,7 @@ void GameController::setFlags(const Card& card)
     }
     else if(card.getValue() == Card::QUEEN || card.getSuit() == Card::SPADES) {  //dama wino
         drawCount = 0;
+        toSkipCounter = 0;
     }
     else {
         handleMultiDraw();

@@ -15,9 +15,9 @@ void HumanPlayer::otherDrawsCard(PLAYER::Name pName)
     emit UIplayerDrawsCard(pName);
 }
 
-void HumanPlayer::doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool& is4played, int drawCount,int toSkipCounter)
+void HumanPlayer::doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool is4played, int drawCount)
 {
-    emit UIdoTurn(this->getPlayableCards(topCard, wishedSuit, whishedValue, is4played,drawCount,toSkipCounter), wishedSuit, whishedValue);
+    emit UIdoTurn(this->getPlayableCards(topCard, wishedSuit, whishedValue, is4played,drawCount), wishedSuit, whishedValue);
 }
 
 void HumanPlayer::gameInit(const std::vector<Card> hand, const Card& topCard, std::map<PLAYER::Name, int> otherPlayerCardCount, std::vector<std::string> playerNames)

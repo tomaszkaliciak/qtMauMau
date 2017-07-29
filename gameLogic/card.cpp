@@ -37,6 +37,7 @@ bool Card::isFunctional()const {
         value == Card::cardValue(2)   ||
         value == Card::cardValue(3)   ||
         value == Card::cardValue(10)  ||
+        value == Card::cardValue(11)  ||
         value == Card::cardValue(12)  ||
         value == Card::cardValue(13)) {
 

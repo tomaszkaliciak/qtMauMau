@@ -15,9 +15,9 @@ void RemotePlayer::otherDrawsCard(PLAYER::Name pName)
     emit RemotePlayerDrawsCard(playerName, pName);
 }
 
-void RemotePlayer::doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue wishedValue, bool& is4played, int drawCount,int toSkipCounter)
+void RemotePlayer::doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue wishedValue, bool is4played, int drawCount)
 {
-    emit RemoteDoTurn(playerName, this->getPlayableCards(topCard, wishedSuit, wishedValue, is4played, drawCount, toSkipCounter), wishedSuit, wishedValue);
+    emit RemoteDoTurn(playerName, this->getPlayableCards(topCard, wishedSuit, wishedValue, is4played, drawCount), wishedSuit, wishedValue);
 }
 
 void RemotePlayer::gameInit(const std::vector<Card> hand, const Card& topCard, std::map<PLAYER::Name, int> otherPlayerCardCount, std::vector<std::string> playerNames)
