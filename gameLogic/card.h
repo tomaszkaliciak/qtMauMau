@@ -3,15 +3,15 @@
 
 
 enum class CardSuit {
-    HEARTS = 1,
+    NONE,
+    HEARTS,
     DIAMONDS,
     CLUBS,
     SPADES,
-    NONE,
 };
 
 enum class CardValue {
-    NONE = 1,
+    NONE,
     TWO,
     THREE,
     FOUR,
