@@ -7,13 +7,7 @@
 #include <stdexcept>
 #include "card.h"
 
-/**
- * @brief The Deck class represents a card deck
- */
 class Deck {
-#ifdef TEST
-    friend class DeckTest;
-#endif
 
 public:
     enum InitStatus {

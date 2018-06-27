@@ -15,7 +15,7 @@ void RemotePlayer::otherDrawsCard(PLAYER::Name pName)
     emit RemotePlayerDrawsCard(playerName, pName);
 }
 
-void RemotePlayer::doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue wishedValue, bool is4played, int drawCount)
+void RemotePlayer::doTurn(Card topCard, CardSuit wishedSuit, CardValue wishedValue, bool is4played, int drawCount)
 {
     emit RemoteDoTurn(playerName, this->getPlayableCards(topCard, wishedSuit, wishedValue, is4played, drawCount), wishedSuit, wishedValue);
 }
@@ -37,7 +37,7 @@ void RemotePlayer::playerWon(std::string _title)
     emit RemotePlayerWon(playerName, _title);
 }
 
-void RemotePlayer::RemotePlaysCard(PLAYER::Name remotePlayerName, const Card& card, Card::cardSuit wishedSuit, Card::cardValue wishedValue)
+void RemotePlayer::RemotePlaysCard(PLAYER::Name remotePlayerName, const Card& card, CardSuit wishedSuit, CardValue wishedValue)
 {
     if (playerName == remotePlayerName) {
         dropCard(card);

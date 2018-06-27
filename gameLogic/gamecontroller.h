@@ -47,9 +47,9 @@ private:
     bool aPlayerWon = false;
 
     bool changedDirection = false;
-    Card::cardSuit wishedSuit = Card::NONE;
+    CardSuit wishedSuit = CardSuit::NONE;
 
-    Card::cardValue wishedValue = Card::NONEE;
+    CardValue wishedValue = CardValue::NONE;
 
     int drawCount = 0;
 
@@ -58,11 +58,11 @@ private:
     bool is4played = false;
 
     //special cards
-    Card::cardValue draw2xCard = Card::TWO;
-    Card::cardValue draw3xCard = Card::THREE;
-    Card::cardValue wishSuitCard = Card::ACE;
-    Card::cardValue skipNextCard = Card::FOUR;
-    Card::cardValue changeDirectCard = Card::NONEE;
+    CardValue draw2xCard = CardValue::TWO;
+    CardValue draw3xCard = CardValue::THREE;
+    CardValue wishSuitCard = CardValue::ACE;
+    CardValue skipNextCard = CardValue::FOUR;
+    CardValue changeDirectCard = CardValue::NONE;
 
 public:
     /**
@@ -93,7 +93,7 @@ public:
      * @param card the played card
      * @param whishedSuit the whised suit if the played card was a wish suit card or Card::NONE
      */
-    void playCard(PLAYER::Name pName, const Card& card, Card::cardSuit whishedSuit, Card::cardValue whishedValue);
+    void playCard(PLAYER::Name pName, const Card& card, CardSuit whishedSuit, CardValue whishedValue);
     /**
      *
      * @brief drawCard called by a player if he wants to draw a card

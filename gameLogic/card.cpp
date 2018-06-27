@@ -1,5 +1,5 @@
 #include "card.h"
-Card::Card(const cardSuit cSuit, const cardValue cValue)
+Card::Card(const CardSuit cSuit, const CardValue cValue)
     : suit(cSuit)
     , value(cValue)
 {
@@ -12,17 +12,17 @@ Card::Card(const Card& card)
 }
 
 Card::Card()
-    : suit(Card::cardSuit(1))
-    , value(Card::cardValue(1))
+    : suit(CardSuit(1))
+    , value(CardValue(1))
 {
 }
 
-Card::cardSuit Card::getSuit() const
+CardSuit Card::getSuit() const
 {
     return suit;
 }
 
-Card::cardValue Card::getValue() const
+CardValue Card::getValue() const
 {
     return value;
 }
@@ -33,13 +33,13 @@ bool Card::operator==(const Card& card) const
 }
 
 bool Card::isFunctional()const {
-    if (value == Card::cardValue(1)   ||
-        value == Card::cardValue(2)   ||
-        value == Card::cardValue(3)   ||
-        value == Card::cardValue(10)  ||
-        value == Card::cardValue(11)  ||
-        value == Card::cardValue(12)  ||
-        value == Card::cardValue(13)) {
+    if (value == CardValue::TWO   ||
+        value == CardValue::THREE ||
+        value == CardValue::FOUR  ||
+        value == CardValue::JACK  ||
+        value == CardValue::QUEEN ||
+        value == CardValue::KING  ||
+        value == CardValue::ACE) {
 
         return true;
     }

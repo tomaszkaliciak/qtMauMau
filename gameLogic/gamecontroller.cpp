@@ -46,10 +46,10 @@ void GameController::gameInit()
 
         players[i]->gameInit(playerCards.at(i), cardDepot.back(), otherPlayerCardCount, getPlayerNames());
     }
-    players[playerOrder[0]]->doTurn(cardDepot.back(), Card::NONE, Card::NONEE, is4played, drawCount);
+    players[playerOrder[0]]->doTurn(cardDepot.back(), CardSuit::NONE, CardValue::NONE, is4played, drawCount);
 }
 
-void GameController::playCard(PLAYER::Name pName, const Card& card, Card::cardSuit whishedSuit, Card::cardValue whishedValue)
+void GameController::playCard(PLAYER::Name pName, const Card& card, CardSuit whishedSuit, CardValue whishedValue)
 {
     if (playerOrder[0] == pName && !playerPlayed) {
 
@@ -121,15 +121,15 @@ void GameController::setFlags(const Card& card)
     if (changedDirection) {
         changedDirection = false;
     }
-    if (card.getValue() == Card::TWO || card.getValue() == Card::THREE) {
-        if (card.getValue() == Card::TWO && drawCount) {
+    if (card.getValue() == CardValue::TWO || card.getValue() == CardValue::THREE) {
+        if (card.getValue() == CardValue::TWO && drawCount) {
             drawCount += 2;
         }
-        else if(card.getValue() == Card::THREE && drawCount) {
+        else if(card.getValue() == CardValue::THREE && drawCount) {
             drawCount += 3;
         }
         else {
-            if(card.getValue() == Card::TWO) {
+            if(card.getValue() == CardValue::TWO) {
                 drawCount = 1;
             }
             else {
@@ -137,12 +137,12 @@ void GameController::setFlags(const Card& card)
             }
         }
     }
-    else if(card.getValue() == Card::FOUR) {
+    else if(card.getValue() == CardValue::FOUR) {
         is4played = true;
         ++toSkipCounter;
     }
-    else if(card.getValue() == Card::KING && (card.getSuit() == Card::HEARTS || card.getSuit() == Card::SPADES )) { // krol serce lub wino
-        if(card.getSuit() == Card::SPADES) { // krol wino żąda od poprzedniego gracza
+    else if(card.getValue() == CardValue::KING && (card.getSuit() == CardSuit::HEARTS || card.getSuit() == CardSuit::SPADES )) { // krol serce lub wino
+        if(card.getSuit() == CardSuit::SPADES) { // krol wino żąda od poprzedniego gracza
             changedDirection = true;
         }
         if(drawCount) {
@@ -152,7 +152,7 @@ void GameController::setFlags(const Card& card)
             drawCount = 4;
         }
     }
-    else if(card.getValue() == Card::QUEEN || card.getSuit() == Card::SPADES) {  //dama wino
+    else if(card.getValue() == CardValue::QUEEN || card.getSuit() == CardSuit::SPADES) {  //dama wino
         drawCount = 0;
         toSkipCounter = 0;
     }

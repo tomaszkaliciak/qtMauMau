@@ -19,26 +19,26 @@ void AIPlayer::otherDrawsCard(PLAYER::Name pName)
     (void)(pName);
 }
 
-void AIPlayer::doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool is4played, int drawCount)
+void AIPlayer::doTurn(Card topCard, CardSuit wishedSuit, CardValue whishedValue, bool is4played, int drawCount)
 {
     std::vector<Card> playableCards = getPlayableCards(topCard, wishedSuit, whishedValue, is4played,drawCount);
     if (playableCards.size() > 0) {
         //TODO ai choose better card
         Card playCard = getPlayCard(playableCards);
-        Card::cardSuit aiWhischedSuit;
-        Card::cardValue aiWhischedValue;
+        CardSuit aiWhischedSuit;
+        CardValue aiWhischedValue;
 
-        if (playCard.getValue() == Card::ACE) {
+        if (playCard.getValue() == CardValue::ACE) {
             aiWhischedSuit = getWhishedCardSuit();
-            aiWhischedValue = Card::NONEE;
+            aiWhischedValue = CardValue::NONE;
         }
-        else if(playCard.getValue() == Card::JACK) {
+        else if(playCard.getValue() == CardValue::JACK) {
             aiWhischedValue = getWhishedCardValue();
-            aiWhischedSuit = Card::NONE;
+            aiWhischedSuit = CardSuit::NONE;
         }
         else {
-            aiWhischedSuit = Card::NONE;
-            aiWhischedValue = Card::NONEE;
+            aiWhischedSuit = CardSuit::NONE;
+            aiWhischedValue = CardValue::NONE;
         }
         dropCard(playableCards.at(0));
         gameController.playCard(playCard, aiWhischedSuit, aiWhischedValue);
@@ -71,12 +71,12 @@ Card AIPlayer::getPlayCard(std::vector<Card> playableCards)
     return playableCards.at(rand() % playableCards.size());
 }
 
-Card::cardSuit AIPlayer::getWhishedCardSuit()
+CardSuit AIPlayer::getWhishedCardSuit()
 {
     int suitsCount[4] = { 0 };
     for (unsigned i = 0; i < hand.size(); ++i) {
-        if (hand[i].getValue() != Card::ACE) {
-            suitsCount[hand[i].getSuit()]++;
+        if (hand[i].getValue() != CardValue::ACE) {
+            suitsCount[static_cast<int>(hand[i].getSuit())]++;
         }
     }
     int maxIndex = 0;
@@ -87,11 +87,11 @@ Card::cardSuit AIPlayer::getWhishedCardSuit()
             maxIndex = i;
         }
     }
-    return Card::cardSuit(maxIndex);
+    return CardSuit(maxIndex);
 }
 
-Card::cardValue AIPlayer::getWhishedCardValue()
+CardValue AIPlayer::getWhishedCardValue()
 {
     // TODO AI choose card
-    return Card::cardValue(4);
+    return CardValue(4);
 }

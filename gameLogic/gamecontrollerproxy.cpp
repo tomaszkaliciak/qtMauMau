@@ -7,7 +7,7 @@ GameControllerProxy::GameControllerProxy(GameController* _gameContr, PLAYER::Nam
 {
 }
 
-void GameControllerProxy::playCard(const Card& card, Card::cardSuit whishedSuit, Card::cardValue whishedValue )
+void GameControllerProxy::playCard(const Card& card, CardSuit whishedSuit, CardValue whishedValue )
 {
     gameContr->playCard(pName, card, whishedSuit, whishedValue);
 }

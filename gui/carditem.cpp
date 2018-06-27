@@ -199,7 +199,7 @@ std::string CardItem::getNormalCardName()
 {
     //because std::to_string() is bugged in some MinGW versions, a workaround
     std::stringstream ss;
-    ss << card.getSuit() << card.getValue();
+    ss << static_cast<int>(card.getSuit()) << static_cast<int>(card.getValue());
     std::string imgName(ss.str());
 
     return imgName;

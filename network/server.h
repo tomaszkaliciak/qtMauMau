@@ -37,14 +37,14 @@ signals:
 public
 slots:
     void RemoteInitPlayground(PLAYER::Name remotePlayerName, const std::vector<Card> remotePlayerCards, std::map<PLAYER::Name, int> otherPlayerCardCount, const Card& topDepotCard, std::vector<std::string> playerNames);
-    void RemoteDoTurn(PLAYER::Name remotePlayerName, std::vector<Card> playableCards, Card::cardSuit wishedSuit, Card::cardValue wishedValue);
+    void RemoteDoTurn(PLAYER::Name remotePlayerName, std::vector<Card> playableCards, CardSuit wishedSuit, CardValue wishedValue);
     void RemotePlayerPlaysCard(PLAYER::Name remotePlayerName, PLAYER::Name pName, const Card& playedCard);
     void RemotePlayerDrawsCard(PLAYER::Name remotePlayerName, PLAYER::Name pName);
     void RemoteAddPlayerCard(PLAYER::Name remotePlayerName, const Card& card);
     void RemotePlayerWon(PLAYER::Name remotePlayerName, std::string _title);
 
 signals:
-    void RemotePlaysCard(PLAYER::Name remotePlayerName, const Card& card, Card::cardSuit wishedSuit, Card::cardValue wishedValue);
+    void RemotePlaysCard(PLAYER::Name remotePlayerName, const Card& card, CardSuit wishedSuit, CardValue wishedValue);
     void RemoteDrawsCard(PLAYER::Name remotePlayerName);
 
 private:

@@ -80,12 +80,12 @@ void Playground::mousePressEvent(QGraphicsSceneMouseEvent* event)
                 CardItem* c = human->getCards()->at(j);
                 if (c->createImg() == item && c->getPlayable()) {
                     history.write("You play a Card", c->getCard().getSuit(), c->getCard().getValue());
-                    Card::cardSuit chosenColor = Card::NONE;
-                    Card::cardValue chosenValue = Card::NONEE;
-                    if (c->getCard().getValue() == Card::ACE) {
+                    CardSuit chosenColor = CardSuit::NONE;
+                    CardValue chosenValue = CardValue::NONE;
+                    if (c->getCard().getValue() == CardValue::ACE) {
                         chosenColor = chooseColor();
                     }
-                    else if (c->getCard().getValue() == Card::JACK) {
+                    else if (c->getCard().getValue() == CardValue::JACK) {
                         chosenValue = chooseValue();
                     }
                     soundMgr.playCard();
@@ -230,7 +230,7 @@ void Playground::updatePlayerCard(CardItem& fromCard, CardItem& toCard, bool wit
  * @param playableCards
  * @param wishedSuit
  */
-void Playground::playerDoTurn(std::vector<Card> playableCards, Card::cardSuit wishedSuit, Card::cardValue wishedValue)
+void Playground::playerDoTurn(std::vector<Card> playableCards, CardSuit wishedSuit, CardValue wishedValue)
 {
     history.write("You have to play, your Cards are:", players.value(PlayerItem::direction::HUMAN)->getCards());
     players.value(PlayerItem::direction::HUMAN)->setActive(wishedSuit,wishedValue);
@@ -351,16 +351,16 @@ void Playground::playerWon(std::string _title)
  * @brief Playground::chooseColor
  * @return
  */
-Card::cardSuit Playground::chooseColor()
+CardSuit Playground::chooseColor()
 {
     ChooseColorDialog dialog;
-    return Card::cardSuit(dialog.exec());
+    return CardSuit(dialog.exec());
 }
 
-Card::cardValue Playground::chooseValue()
+CardValue Playground::chooseValue()
 {
     ChooseValueDialog dialog;
-    return Card::cardValue(dialog.exec());
+    return CardValue(dialog.exec());
 }
 
 

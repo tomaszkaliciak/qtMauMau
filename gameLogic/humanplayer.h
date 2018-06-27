@@ -36,7 +36,7 @@ public:
      * @param topCard the top card of the card depot which his decision which card he plays is based on
      * @param wishedSuit Card::NONE or the wished suit of the to be played cards
      */
-    void doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool is4played, int drawCount);
+    void doTurn(Card topCard, CardSuit wishedSuit, CardValue whishedValue, bool is4played, int drawCount);
     /**
      * @brief gameInit initializes the player before the game
      * @param hand the starting hand cards
@@ -78,7 +78,7 @@ signals:
      * @param playableCards the cards the player can play
      * @param wishedSuit the suit which is wished or Card::NONE
      */
-    void UIdoTurn(std::vector<Card> playableCards, Card::cardSuit wishedSuit, Card::cardValue whishedValue);
+    void UIdoTurn(std::vector<Card> playableCards, CardSuit wishedSuit, CardValue whishedValue);
     /**
      * @brief UIplayerPlaysCard emited when an other player  plays a card
      * @param pName the player who played a card
@@ -108,7 +108,7 @@ slots:
      * @param card the played card
      * @param whishedSuit the wished suit or Card::NONE
      */
-    void UIplaysCard(const Card& card, Card::cardSuit whishedSuit, Card::cardValue whishedValue);
+    void UIplaysCard(const Card& card, CardSuit whishedSuit, CardValue whishedValue);
     /**
      * @brief UIdrawsCard called when the player draws a card
      */

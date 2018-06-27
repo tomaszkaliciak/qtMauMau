@@ -53,9 +53,9 @@ QString MProtocol::cardToSting(Card card)
 {
     //sting structure: suit:value
     QString cardAsString;
-    cardAsString.append(QString::number(card.getSuit()));
+    cardAsString.append(QString::number(static_cast<int>(card.getSuit())));
     cardAsString.append(":");
-    cardAsString.append(QString::number(card.getValue()));
+    cardAsString.append(QString::number(static_cast<int>(card.getValue())));
     return cardAsString;
 }
 /**
@@ -138,6 +138,6 @@ Card MProtocol::stingToCard(QString cardAsSting)
 {
     QStringList cardAttrib = cardAsSting.split(":");
 
-    Card card = Card(Card::cardSuit(cardAttrib[0].toInt()), Card::cardValue(cardAttrib[1].toInt()));
+    Card card = Card(CardSuit(cardAttrib[0].toInt()), CardValue(cardAttrib[1].toInt()));
     return card;
 }

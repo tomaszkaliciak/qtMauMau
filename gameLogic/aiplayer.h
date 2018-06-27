@@ -3,9 +3,6 @@
 
 #include "player.h"
 
-/**
- * @brief The AIPlayer class is an implementation of the player class as computer controlled player
- */
 class AIPlayer : public Player {
 #ifdef TEST
     friend class AIPlayer_test;
@@ -36,7 +33,7 @@ public:
      * @param topCard the top card of the card depot which his decision which card he plays is based on
      * @param wishedSuit Card::NONE or the wished suit of the to be played cards
      */
-    void doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool is4played, int drawCount);
+    void doTurn(Card topCard, CardSuit wishedSuit, CardValue whishedValue, bool is4played, int drawCount);
     /**
      * @brief gameInit initializes the player before the game
      * @param hand the starting hand cards
@@ -62,8 +59,8 @@ public:
 
 private:
     Card getPlayCard(std::vector<Card> playableCards);
-    Card::cardSuit getWhishedCardSuit();
-    Card::cardValue getWhishedCardValue();
+    CardSuit getWhishedCardSuit();
+    CardValue getWhishedCardValue();
 };
 
 #endif // AIPLAYER_H

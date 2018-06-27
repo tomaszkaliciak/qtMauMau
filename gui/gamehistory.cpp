@@ -67,7 +67,7 @@ void GameHistory::write(QString text, CardItem &card)
  * @param suit
  * @param value
  */
-void GameHistory::write(QString text, Card::cardSuit suit, Card::cardValue value)
+void GameHistory::write(QString text, CardSuit suit, CardValue value)
 {
     QString hand;
     Card c = Card(suit,value);
@@ -82,27 +82,27 @@ void GameHistory::write(QString text, Card::cardSuit suit, Card::cardValue value
 QString GameHistory::cardToString(CardItem item){
         QString hand;
         switch (item.getCard().getValue()) {
-        case Card::cardValue::TWO: hand += "2 "; break;
-        case Card::cardValue::THREE: hand += "3 "; break;
-        case Card::cardValue::FOUR: hand += "4 "; break;
-        case Card::cardValue::FIVE: hand += "5 "; break;
-        case Card::cardValue::SIX: hand += "6 "; break;
-        case Card::cardValue::SEVEN: hand += "7 "; break;
-        case Card::cardValue::EIGHT: hand += "8 "; break;
-        case Card::cardValue::NINE: hand += "9 "; break;
-        case Card::cardValue::TEN: hand += "10 "; break;
-        case Card::cardValue::JACK: hand += "Jack "; break;
-        case Card::cardValue::QUEEN: hand += "Queen "; break;
-        case Card::cardValue::KING: hand += "King "; break;
-        case Card::cardValue::ACE: hand += "Ace "; break;
-        case Card::cardValue::NONEE: hand += "NONEE "; break;
+        case CardValue::TWO: hand += "2 "; break;
+        case CardValue::THREE: hand += "3 "; break;
+        case CardValue::FOUR: hand += "4 "; break;
+        case CardValue::FIVE: hand += "5 "; break;
+        case CardValue::SIX: hand += "6 "; break;
+        case CardValue::SEVEN: hand += "7 "; break;
+        case CardValue::EIGHT: hand += "8 "; break;
+        case CardValue::NINE: hand += "9 "; break;
+        case CardValue::TEN: hand += "10 "; break;
+        case CardValue::JACK: hand += "Jack "; break;
+        case CardValue::QUEEN: hand += "Queen "; break;
+        case CardValue::KING: hand += "King "; break;
+        case CardValue::ACE: hand += "Ace "; break;
+        case CardValue::NONE: hand += "NONEE "; break;
         }
 
         switch (item.getCard().getSuit()) {
-        case Card::cardSuit::HEARTS: hand += "Hearts"; break;
-        case Card::cardSuit::SPADES: hand += "Spades"; break;
-        case Card::cardSuit::DIAMONDS: hand += "Diamonds"; break;
-        case Card::cardSuit::CLUBS: hand += "Clubs"; break;
+        case CardSuit::HEARTS: hand += "Hearts"; break;
+        case CardSuit::SPADES: hand += "Spades"; break;
+        case CardSuit::DIAMONDS: hand += "Diamonds"; break;
+        case CardSuit::CLUBS: hand += "Clubs"; break;
         default: break;
         }
         return hand;

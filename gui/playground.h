@@ -47,13 +47,13 @@ private:
     CardItem depot;
     CardItem stack;
     int zValue = 1;
-    Card::cardValue wishSuitCard;
+    CardValue wishSuitCard;
 
     void updateDepotCard(CardItem& fromCard, CardItem& toCard, bool withAnimation = true);
     void updatePlayerCard(CardItem& fromCard, CardItem &toCard, bool withAnimation = true);
     void createPlayer(const std::vector<Card> humanPlayerCards, std::map<PLAYER::Name, int> otherPlayerCardCount, std::vector<std::string> playerNames);
-    Card::cardSuit chooseColor();
-    Card::cardValue chooseValue();
+    CardSuit chooseColor();
+    CardValue chooseValue();
 
 
     GameHistory history;
@@ -76,7 +76,7 @@ slots:
                         std::vector<std::string> playerNames);
     //bekomme alle Karten und anzahl karten der anderen Mitspieler
 
-    void playerDoTurn(std::vector<Card> playableCards, Card::cardSuit wishedSuit, Card::cardValue wishedValue);
+    void playerDoTurn(std::vector<Card> playableCards, CardSuit wishedSuit, CardValue wishedValue);
     // bekomme alle Spielbaren Karten von Human player
 
     void playerPlaysCard(PLAYER::Name player, const Card& playedCard);
@@ -91,7 +91,7 @@ slots:
     void playerWon(std::string _title);
 
 signals:
-    void playCard(const Card& card, Card::cardSuit whishedSuit, Card::cardValue wishedValue);
+    void playCard(const Card& card, CardSuit whishedSuit, CardValue wishedValue);
     void drawCard();
 };
 

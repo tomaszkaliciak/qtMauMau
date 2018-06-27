@@ -1,14 +1,11 @@
 #include "deck.h"
-//
-/**
- * Initializes a full cad deck
- */
+
 Deck::Deck(Deck::InitStatus status)
 {
     if (status == Deck::FULL) {
         for (int i = 0; i < 4; i++) {
             for (int j = 1; j <= 13; j++) {
-                cards.push_back(Card(Card::cardSuit(i), Card::cardValue(j)));
+                cards.push_back(Card(CardSuit(i), CardValue(j)));
                 }
             }
             shuffleManager();
@@ -21,11 +18,6 @@ void Deck::shuffleManager() {
         shuffle();
     }
 }
-
-/*
- * http://bost.ocks.org/mike/shuffle/
- *
- */
 
 void Deck::shuffle()
 {
@@ -43,14 +35,6 @@ void Deck::pushCard(const Card card)
     cards.push_back(card);
 }
 
-/**
- * Returns the last card of the deck, if this deck is empty
- * the Deck is refilled by the underlying cards of the given deck,
- * shuffled and then the last card is returned.
- * @brief Returns the last card of the deck.
- * @param dropped_cards
- * @return
- */
 Card Deck::getLast(Deck& cardDepot)
 {
     if (empty()) {

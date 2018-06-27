@@ -15,7 +15,7 @@ void HumanPlayer::otherDrawsCard(PLAYER::Name pName)
     emit UIplayerDrawsCard(pName);
 }
 
-void HumanPlayer::doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool is4played, int drawCount)
+void HumanPlayer::doTurn(Card topCard, CardSuit wishedSuit, CardValue whishedValue, bool is4played, int drawCount)
 {
     emit UIdoTurn(this->getPlayableCards(topCard, wishedSuit, whishedValue, is4played,drawCount), wishedSuit, whishedValue);
 }
@@ -37,7 +37,7 @@ void HumanPlayer::playerWon(std::string _title)
     emit UIPlayerWon(_title);
 }
 
-void HumanPlayer::UIplaysCard(const Card& card, Card::cardSuit whishedSuit, Card::cardValue whishedValue)
+void HumanPlayer::UIplaysCard(const Card& card, CardSuit whishedSuit, CardValue whishedValue)
 {
     dropCard(card);
     gameController.playCard(card, whishedSuit, whishedValue);

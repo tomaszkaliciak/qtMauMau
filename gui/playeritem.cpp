@@ -183,26 +183,26 @@ void PlayerItem::unsetPlayableCards()
  * @brief PlayerItem::setActive
  * @param wishSuitCard what is the whised suit?
  */
-void PlayerItem::setActive(Card::cardSuit wishSuitCard, Card::cardValue wishValueCard)
+void PlayerItem::setActive(CardSuit wishSuitCard, CardValue wishValueCard)
 {
-    if(wishSuitCard != Card::NONE) {
+    if(wishSuitCard != CardSuit::NONE) {
         switch(wishSuitCard){
-            case Card::cardSuit::HEARTS: wish = "♥"; break;
-            case Card::cardSuit::DIAMONDS: wish = "♦"; break;
-            case Card::cardSuit::CLUBS: wish = "♣"; break;
-            case Card::cardSuit::SPADES: wish = "♠"; break;
+            case CardSuit::HEARTS: wish = "♥"; break;
+            case CardSuit::DIAMONDS: wish = "♦"; break;
+            case CardSuit::CLUBS: wish = "♣"; break;
+            case CardSuit::SPADES: wish = "♠"; break;
             default: wish = ""; break;
     }
     }
-    else if(wishValueCard != Card::NONEE) {
+    else if(wishValueCard != CardValue::NONE) {
         switch(wishValueCard){
-            case Card::cardValue::FIVE: wish = "5"; break;
-            case Card::cardValue::SIX: wish = "6"; break;
-            case Card::cardValue::SEVEN: wish = "7"; break;
-            case Card::cardValue::EIGHT: wish = "8"; break;
-            case Card::cardValue::NINE: wish = "9"; break;
-            case Card::cardValue::TEN: wish = "10"; break;
-            case Card::cardValue::QUEEN: wish = "Q"; break;
+            case CardValue::FIVE: wish = "5"; break;
+            case CardValue::SIX: wish = "6"; break;
+            case CardValue::SEVEN: wish = "7"; break;
+            case CardValue::EIGHT: wish = "8"; break;
+            case CardValue::NINE: wish = "9"; break;
+            case CardValue::TEN: wish = "10"; break;
+            case CardValue::QUEEN: wish = "Q"; break;
             default: wish = ""; break;
         }
     }

@@ -37,7 +37,7 @@ public:
      * @param topCard the top card of the card depot which his decision which card he plays is based on
      * @param wishedSuit Card::NONE or the wished suit of the to be played cards
      */
-    void doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool is4played, int drawCount);
+    void doTurn(Card topCard, CardSuit wishedSuit, CardValue whishedValue, bool is4played, int drawCount);
     /**
      * @brief gameInit initializes the player before the game
      * @param hand the starting hand cards
@@ -82,7 +82,7 @@ signals:
      * @param playableCards the cards the client can play
      * @param wishedSuit the suit wich is currently wished or Card::NONE
      */
-    void RemoteDoTurn(PLAYER::Name remotePlayerName, std::vector<Card> playableCards, Card::cardSuit wishedSuit, Card::cardValue whishedValue);
+    void RemoteDoTurn(PLAYER::Name remotePlayerName, std::vector<Card> playableCards, CardSuit wishedSuit, CardValue whishedValue);
     /**
      * @brief RemotePlayerPlaysCard is emited when a player plays a card and the remote client gets notified about it
      * @param remotePlayerName the name of the this player
@@ -117,7 +117,7 @@ slots:
      * @param card the played card
      * @param wishedSuit the wished suit or Card::NONE
      */
-    void RemotePlaysCard(PLAYER::Name remotePlayerName, const Card& card, Card::cardSuit wishedSuit, Card::cardValue whishedValue);
+    void RemotePlaysCard(PLAYER::Name remotePlayerName, const Card& card, CardSuit wishedSuit, CardValue whishedValue);
     /**
      * @brief RemoteDrawsCard communicates with the gamecontroller that the client drew a card
      * @param remotePlayerName the name of the this player

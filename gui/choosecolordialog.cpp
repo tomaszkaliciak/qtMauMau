@@ -52,18 +52,18 @@ bool ChooseColorDialog::eventFilter(QObject* obj, QEvent* event)
 void ChooseColorDialog::mousePressed(QObject* pressedButton)
 {
 
-    int cardSuit = 0;
+    CardSuit cardSuit = CardSuit::HEARTS;
 
     if (pressedButton == ui->btnHearts) {
-        cardSuit = Card::HEARTS;
+        cardSuit = CardSuit::HEARTS;
     } else if (pressedButton == ui->btnDiamonds) {
-        cardSuit = Card::DIAMONDS;
+        cardSuit = CardSuit::DIAMONDS;
     } else if (pressedButton == ui->btnClubs) {
-        cardSuit = Card::CLUBS;
+        cardSuit = CardSuit::CLUBS;
     } else if (pressedButton == ui->btnSpades) {
-        cardSuit = Card::SPADES;
+        cardSuit = CardSuit::SPADES;
     }
-    this->done(cardSuit);
+    this->done(static_cast<int>(cardSuit));
 }
 
 ChooseColorDialog::~ChooseColorDialog()

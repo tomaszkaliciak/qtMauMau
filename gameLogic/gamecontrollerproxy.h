@@ -25,7 +25,7 @@ public:
      * @param card the played card
      * @param whishedSuit the wished suit or Card::NONE
      */
-    void playCard(const Card& card, Card::cardSuit whishedSuit, Card::cardValue whishedValue);
+    void playCard(const Card& card, CardSuit whishedSuit, CardValue whishedValue);
     /**
      * @brief drawCard calls draw card on the gamecontroller
      */

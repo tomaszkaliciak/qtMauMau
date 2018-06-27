@@ -36,7 +36,7 @@ protected:
     /**
      * @brief wishSuitCard the card a player can wish a suit when he plays a card with this vlaue
      */
-    Card::cardValue wishSuitCard;
+    CardValue wishSuitCard;
 
     /**
      * @brief gameController the gamecontroller proxy used to communicate with the gamecontroller
@@ -75,7 +75,7 @@ public:
      * @param topCard the top card of the card depot which his decision which card he plays is based on
      * @param wishedSuit Card::NONE or the wished suit of the to be played cards
      */
-    virtual void doTurn(Card topCard, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool is4played,int drawCount) = 0;
+    virtual void doTurn(Card topCard, CardSuit wishedSuit, CardValue whishedValue, bool is4played,int drawCount) = 0;
     /**
      * @brief gameInit initializes the player before the game
      * @param hand the starting hand cards
@@ -114,7 +114,7 @@ public:
      */
     std::string getTitle() const;
 
-    std::vector<Card> getPlayableCards(const Card& card, Card::cardSuit wishedSuit, Card::cardValue whishedValue, bool is4played, int drawCount);
+    std::vector<Card> getPlayableCards(const Card& card, CardSuit wishedSuit, CardValue whishedValue, bool is4played, int drawCount);
 
 protected:
     /**

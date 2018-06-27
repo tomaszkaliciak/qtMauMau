@@ -46,16 +46,16 @@ void MauClient::OnError()
  * @param card the card the player played
  * @param wishedSuit the wished suit
  */
-void MauClient::UIplaysCard(const Card& card, Card::cardSuit wishedSuit, Card::cardValue wishedValue)
+void MauClient::UIplaysCard(const Card& card, CardSuit wishedSuit, CardValue wishedValue)
 {
     QString message;
     message.append(QString::number(MProtocol::PLAY_CARD));
     message.append(";");
     message.append(MProtocol::cardToSting(card));
     message.append(";");
-    message.append(QString::number(wishedSuit));
+    message.append(QString::number(static_cast<int>(wishedSuit)));
     message.append(";");
-    message.append(QString::number(wishedValue));
+    message.append(QString::number(static_cast<int>(wishedValue)));
     writeNextData(message);
 }
 /**
@@ -129,8 +129,8 @@ void MauClient::handleMessage(QString message)
         //        void UIdoTurn(std::vector<Card> playableCards,
         //                      Card::cardSuit wishedSuit);
         emit UIdoTurn(MProtocol::stringToCardVec(messageSplit.at(1)),
-                      Card::cardSuit(messageSplit.at(2).toInt()),
-                      Card::cardValue(messageSplit.at(3).toInt()));
+                      CardSuit(messageSplit.at(2).toInt()),
+                      CardValue(messageSplit.at(3).toInt()));
         break;
     case MProtocol::OTHER_PLAYS_CARD:
         //        void UIplayerPlaysCard(PLAYER::Name pName,

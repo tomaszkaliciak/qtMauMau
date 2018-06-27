@@ -16,7 +16,7 @@ public:
     QString filename = "gamehistory.txt";
     QFile *file;
     void write(QString text, CardItem &card);
-    void write(QString text, Card::cardSuit suit, Card::cardValue value);
+    void write(QString text, CardSuit suit, CardValue value);
     ~GameHistory();
 private:
     QString cardToString(CardItem item);
