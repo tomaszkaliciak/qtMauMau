@@ -12,10 +12,11 @@ Card::Card(const Card& card)
 }
 
 Card::Card()
-    : suit(CardSuit(1))
-    , value(CardValue(1))
+    : suit(CardSuit(0))
+    , value(CardValue(0))
 {
 }
+
 
 CardSuit Card::getSuit() const
 {

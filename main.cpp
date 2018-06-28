@@ -19,12 +19,6 @@
 
 #include "gameLogic/humanplayer.h"
 
-#ifdef TEST
-#include "gameLogic/Test/gamecontroller_test.h"
-#include "gameLogic/Test/decktest.h"
-#include "gameLogic/Test/aiplayer_test.h"
-#endif
-
 MauClient* client;
 
 void customMessageHandler(QtMsgType type, const QMessageLogContext& context, const QString& message)
@@ -87,19 +81,6 @@ int main(int argc, char* argv[])
 
     window.show();
 
-#ifdef TEST
-    //TODO TEST
-    GameControllerTest* gcTest = new GameControllerTest();
-    QTest::qExec(gcTest);
-//    delete gcTest;
-    DeckTest* deckTest = new DeckTest();
-    QTest::qExec(deckTest);
-//    delete deckTest;
-    AIPlayer_test* aiP_test = new AIPlayer_test();
-    QTest::qExec(aiP_test);
-//    delete aiP_test;
-
-#endif
 
     return app.exec();
 }

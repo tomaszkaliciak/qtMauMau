@@ -3,16 +3,17 @@
 Deck::Deck(Deck::InitStatus status)
 {
     if (status == Deck::FULL) {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 1; i <= 4; i++) {
             for (int j = 1; j <= 13; j++) {
-                cards.push_back(Card(CardSuit(i), CardValue(j)));
-                }
+                cards.push_back(Card(static_cast<CardSuit>(i), static_cast<CardValue>(j)));
             }
-            shuffleManager();
+        }
+        shuffleManager();
     }
 }
 
-void Deck::shuffleManager() {
+void Deck::shuffleManager()
+{
     shuffle();
     while(cards.back().isFunctional()) {
         shuffle();
