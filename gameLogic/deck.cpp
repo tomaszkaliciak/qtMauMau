@@ -21,13 +21,10 @@ void Deck::shuffleManager() {
 
 void Deck::shuffle()
 {
-    int m = cards.size();
-    Card temp;
-    int i;
-    while (m) {
-        i = (rand() % m--);
-        std::swap(cards[i],cards[m]);
-    }
+    std::random_device rd;
+    std::mt19937 g(rd());
+
+    std::shuffle(cards.begin(), cards.end(), g);
 }
 
 void Deck::pushCard(const Card card)
