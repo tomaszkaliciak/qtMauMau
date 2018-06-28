@@ -13,7 +13,7 @@ private:
 
 public:
     explicit GameControllerProxy(GameController* _gameContr, PLAYER::Name _pName);
-    void playCard(const Card& card, CardSuit whishedSuit, CardValue whishedValue);
+    void playCard(const Card& card, CardSuit wishedSuit, CardValue wishedValue);
     void drawCard();
 
 };

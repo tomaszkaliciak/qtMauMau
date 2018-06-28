@@ -5,7 +5,7 @@ Deck::Deck(Deck::InitStatus status)
     if (status == Deck::FULL) {
         for (int i = 1; i <= 4; i++) {
             for (int j = 1; j <= 13; j++) {
-                cards.push_back(Card(static_cast<CardSuit>(i), static_cast<CardValue>(j)));
+                cards.push_back(Card(CardSuit(i), CardValue(j)));
             }
         }
         shuffleManager();

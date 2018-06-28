@@ -14,7 +14,7 @@ public:
 
     void otherPlaysCard(PLAYER::Name playerName, const Card& playedCard);
     void otherDrawsCard(PLAYER::Name playerName);
-    void doTurn(Card topCard, CardSuit wishedSuit, CardValue whishedValue, bool is4played, int drawCount);
+    void doTurn(Card topCard, CardSuit wishedSuit, CardValue wishedValue, bool is4played, int drawCount);
     void gameInit(const std::vector<Card> hand,
                   const Card& topCard,
                   std::map<PLAYER::Name, int> otherPlayerCardCount,
@@ -24,8 +24,8 @@ public:
 
 private:
     Card getPlayCard(std::vector<Card> playableCards);
-    CardSuit getWhishedCardSuit();
-    CardValue getWhishedCardValue();
+    CardSuit getwishedCardSuit();
+    CardValue getwishedCardValue();
 };
 
 #endif // AIPLAYER_H

@@ -49,13 +49,13 @@ void GameController::gameInit()
     players[playerOrder[0]]->doTurn(cardDepot.back(), CardSuit::NONE, CardValue::NONE, is4played, drawCount);
 }
 
-void GameController::playCard(PLAYER::Name pName, const Card& card, CardSuit whishedSuit, CardValue whishedValue)
+void GameController::playCard(PLAYER::Name pName, const Card& card, CardSuit wishedSuit, CardValue wishedValue)
 {
     if (playerOrder[0] == pName && !playerPlayed) {
 
         playerPlayed = true;
-        this->wishedSuit = whishedSuit;
-        this->wishedValue = whishedValue;
+        this->wishedSuit = wishedSuit;
+        this->wishedValue = wishedValue;
         cardDepot.pushCard(card);
 
         for (unsigned i = 0; i < players.size(); ++i) {

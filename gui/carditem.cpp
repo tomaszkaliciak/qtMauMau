@@ -201,7 +201,6 @@ std::string CardItem::getNormalCardName()
     else {
         imgName = suit + value;
     }
-    std::cout << imgName << std::endl;
     return imgName;
 }
 /**

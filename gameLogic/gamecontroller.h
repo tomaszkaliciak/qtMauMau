@@ -37,7 +37,7 @@ public:
     ~GameController();
     void setPlayers(std::vector<Player*> _players);
     void gameInit();
-    void playCard(PLAYER::Name pName, const Card& card, CardSuit whishedSuit, CardValue whishedValue);
+    void playCard(PLAYER::Name pName, const Card& card, CardSuit wishedSuit, CardValue wishedValue);
     void drawCard(PLAYER::Name pName);
 
 

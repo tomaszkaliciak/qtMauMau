@@ -35,7 +35,7 @@ public:
     virtual void otherPlaysCard(PLAYER::Name playerName, const Card& playedCard) = 0;
 
     virtual void otherDrawsCard(PLAYER::Name playerName) = 0;
-    virtual void doTurn(Card topCard, CardSuit wishedSuit, CardValue whishedValue, bool is4played,int drawCount) = 0;
+    virtual void doTurn(Card topCard, CardSuit wishedSuit, CardValue wishedValue, bool is4played,int drawCount) = 0;
     virtual void gameInit(const std::vector<Card> hand,
                           const Card& topCard,
                           std::map<PLAYER::Name, int> otherPlayerCardCount,
@@ -50,7 +50,7 @@ public:
 
     std::string getTitle() const;
 
-    std::vector<Card> getPlayableCards(const Card& card, CardSuit wishedSuit, CardValue whishedValue, bool is4played, int drawCount);
+    std::vector<Card> getPlayableCards(const Card& card, CardSuit wishedSuit, CardValue wishedValue, bool is4played, int drawCount);
 
 protected:
     void dropCard(const Card& card);

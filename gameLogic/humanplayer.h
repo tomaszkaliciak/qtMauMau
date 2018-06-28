@@ -11,7 +11,7 @@ public:
     explicit HumanPlayer(PLAYER::Name playerName, GameControllerProxy _gameController, std::string name);
     void otherPlaysCard(PLAYER::Name pName, const Card& playedCard);
     void otherDrawsCard(PLAYER::Name pName);
-    void doTurn(Card topCard, CardSuit wishedSuit, CardValue whishedValue, bool is4played, int drawCount);
+    void doTurn(Card topCard, CardSuit wishedSuit, CardValue wishedValue, bool is4played, int drawCount);
     void gameInit(const std::vector<Card> hand,
                   const Card& topCard,
                   std::map<PLAYER::Name, int> otherPlayerCardCount,
@@ -25,7 +25,7 @@ signals:
                           const Card& topDepotCard,
                           std::vector<std::string> playerNames);
 
-    void UIdoTurn(std::vector<Card> playableCards, CardSuit wishedSuit, CardValue whishedValue);
+    void UIdoTurn(std::vector<Card> playableCards, CardSuit wishedSuit, CardValue wishedValue);
 
     void UIplayerPlaysCard(PLAYER::Name pName, const Card& playedCard);
 
@@ -38,7 +38,7 @@ signals:
 public
 slots:
 
-    void UIplaysCard(const Card& card, CardSuit whishedSuit, CardValue whishedValue);
+    void UIplaysCard(const Card& card, CardSuit wishedSuit, CardValue wishedValue);
 
     void UIdrawsCard();
 };

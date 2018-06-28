@@ -19,26 +19,20 @@ void AIPlayer::otherDrawsCard(PLAYER::Name pName)
     (void)(pName);
 }
 
-void AIPlayer::doTurn(Card topCard, CardSuit wishedSuit, CardValue whishedValue, bool is4played, int drawCount)
+void AIPlayer::doTurn(Card topCard, CardSuit wishedSuit, CardValue wishedValue, bool is4played, int drawCount)
 {
-    std::vector<Card> playableCards = getPlayableCards(topCard, wishedSuit, whishedValue, is4played,drawCount);
+    std::vector<Card> playableCards = getPlayableCards(topCard, wishedSuit, wishedValue, is4played,drawCount);
     if (playableCards.size() > 0) {
-        //TODO ai choose better card
+
         Card playCard = getPlayCard(playableCards);
-        CardSuit aiWhischedSuit;
-        CardValue aiWhischedValue;
+        CardSuit aiWhischedSuit = CardSuit::NONE;
+        CardValue aiWhischedValue = CardValue::NONE;
 
         if (playCard.getValue() == CardValue::ACE) {
-            aiWhischedSuit = getWhishedCardSuit();
-            aiWhischedValue = CardValue::NONE;
+            aiWhischedSuit = getwishedCardSuit();
         }
         else if(playCard.getValue() == CardValue::JACK) {
-            aiWhischedValue = getWhishedCardValue();
-            aiWhischedSuit = CardSuit::NONE;
-        }
-        else {
-            aiWhischedSuit = CardSuit::NONE;
-            aiWhischedValue = CardValue::NONE;
+            aiWhischedValue = getwishedCardValue();
         }
         dropCard(playableCards.at(0));
         gameController.playCard(playCard, aiWhischedSuit, aiWhischedValue);
@@ -71,7 +65,7 @@ Card AIPlayer::getPlayCard(std::vector<Card> playableCards)
     return playableCards.at(rand() % playableCards.size());
 }
 
-CardSuit AIPlayer::getWhishedCardSuit()
+CardSuit AIPlayer::getwishedCardSuit()
 {
     int suitsCount[4] = { 0 };
     for (unsigned i = 0; i < hand.size(); ++i) {
@@ -90,7 +84,7 @@ CardSuit AIPlayer::getWhishedCardSuit()
     return CardSuit(maxIndex);
 }
 
-CardValue AIPlayer::getWhishedCardValue()
+CardValue AIPlayer::getwishedCardValue()
 {
     // TODO AI choose card
     return CardValue(4);

@@ -13,7 +13,7 @@ public:
 
     void otherPlaysCard(PLAYER::Name pName, const Card& playedCard);
     void otherDrawsCard(PLAYER::Name pName);
-    void doTurn(Card topCard, CardSuit wishedSuit, CardValue whishedValue, bool is4played, int drawCount);
+    void doTurn(Card topCard, CardSuit wishedSuit, CardValue wishedValue, bool is4played, int drawCount);
     void gameInit(const std::vector<Card> hand,
                   const Card& topCard,
                   std::map<PLAYER::Name, int> otherPlayerCardCount,
@@ -28,7 +28,7 @@ signals:
                               const Card& topDepotCard,
                               std::vector<std::string> playerNames);
 
-    void RemoteDoTurn(PLAYER::Name remotePlayerName, std::vector<Card> playableCards, CardSuit wishedSuit, CardValue whishedValue);
+    void RemoteDoTurn(PLAYER::Name remotePlayerName, std::vector<Card> playableCards, CardSuit wishedSuit, CardValue wishedValue);
 
     void RemotePlayerPlaysCard(PLAYER::Name remotePlayerName, PLAYER::Name pName, const Card& playedCard);
 
@@ -41,7 +41,7 @@ signals:
 public
 slots:
 
-    void RemotePlaysCard(PLAYER::Name remotePlayerName, const Card& card, CardSuit wishedSuit, CardValue whishedValue);
+    void RemotePlaysCard(PLAYER::Name remotePlayerName, const Card& card, CardSuit wishedSuit, CardValue wishedValue);
 
     void RemoteDrawsCard(PLAYER::Name remotePlayerName);
 };

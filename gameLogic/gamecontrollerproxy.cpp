@@ -7,9 +7,9 @@ GameControllerProxy::GameControllerProxy(GameController* _gameContr, PLAYER::Nam
 {
 }
 
-void GameControllerProxy::playCard(const Card& card, CardSuit whishedSuit, CardValue whishedValue )
+void GameControllerProxy::playCard(const Card& card, CardSuit wishedSuit, CardValue wishedValue )
 {
-    gameContr->playCard(pName, card, whishedSuit, whishedValue);
+    gameContr->playCard(pName, card, wishedSuit, wishedValue);
 }
 
 void GameControllerProxy::drawCard()
