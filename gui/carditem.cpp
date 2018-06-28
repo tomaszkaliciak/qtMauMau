@@ -148,13 +148,7 @@ QGraphicsPixmapItem* CardItem::createImg()
             fullImagePath = ":/img/deck_" + deckNumber + "/" + imgName + imgExtension;
         } else {
             imgName = getNormalCardName();
-            if(imgName.size() >= 3) {
-                fullImagePath = ":/img/deck_" + deckNumber + "/" + imgName + imgExtension;
-            }
-            else {
-                imgName.insert(1,"0");
-                fullImagePath = ":/img/deck_" + deckNumber + "/" + imgName + imgExtension;
-            }
+            fullImagePath = ":/img/deck_" + deckNumber + "/" + imgName + imgExtension;
         }
 
         graphicsItem = new QGraphicsPixmapItem(QPixmap(fullImagePath.c_str()));
@@ -197,11 +191,17 @@ std::string CardItem::getSpecialCardName()
 
 std::string CardItem::getNormalCardName()
 {
-    //because std::to_string() is bugged in some MinGW versions, a workaround
-    std::stringstream ss;
-    ss << static_cast<int>(card.getSuit()) << static_cast<int>(card.getValue());
-    std::string imgName(ss.str());
+    std::string imgName;
 
+    std::string suit = std::to_string(static_cast<int>(card.getSuit()));
+    std::string value = std::to_string(static_cast<int>(card.getValue()));
+    if(value.length() < 2) {
+        imgName = suit + "0" + value;
+    }
+    else {
+        imgName = suit + value;
+    }
+    std::cout << imgName << std::endl;
     return imgName;
 }
 /**
